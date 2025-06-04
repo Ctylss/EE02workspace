@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mock Login & Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .login-container, .dashboard {
+      display: none;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-container.active, .dashboard.active {
+      display: flex;
+    }
+    .login-box {
+      border: 1px solid #ccc;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .dashboard {
+      display: flex;
+    }
+    .sidebar {
+      width: 200px;
+      background-color: #2c3e50;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      cursor: pointer;
+    }
+    .sidebar button:hover {
+      background-color: #34495e;
+    }
+    .content {
+      padding: 2rem;
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login -->
+  <div class="login-container active" id="loginContainer">
+    <div class="login-box">
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username" /><br /><br />
+      <input type="password" id="password" placeholder="Password" /><br /><br />
+      <button onclick="login()">Login</button>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <div class="sidebar">
+      <button onclick="loadContent('Personnel Management')">1. 人員員工</button>
+      <button onclick="loadContent('Equipment Management')">2. 設備機台</button>
+      <button onclick="loadContent('Work Order')">3. 工單</button>
+      <button onclick="loadContent('Production Materials')">4. 生產物料</button>
+      <button onclick="loadContent('Attendance & HR')">5. 出缺勤/人資</button>
+    </div>
+    <div class="content" id="contentArea">
+      <h2>歡迎使用模擬伺服器系統</h2>
+      <p>請從左側選擇功能</p>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      if (user && pass) {
+        document.getElementById('loginContainer').classList.remove('active');
+        document.getElementById('dashboard').classList.add('active');
+      } else {
+        alert("請輸入帳號與密碼。");
+      }
+    }
+
+    function loadContent(featureName) {
+      const content = document.getElementById('contentArea');
+      content.innerHTML = `<h2>${featureName}</h2><p>這是 ${featureName} 的模擬內容。</p>`;
+    }
+  </script>
+</body>
+</html>
