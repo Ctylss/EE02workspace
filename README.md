@@ -2,6 +2,7 @@
 小組專案
 
 🧱 主專案總結構
+```js
 management system/
 ├── packages/                        # ← 用 git subtree 拉進各模組
 │   ├── employee/                    # 人員員工模組
@@ -50,19 +51,20 @@ employee-module/
 │
 ├── index.js                        # 匯出 router 給主專案用
 └── README.md
-
+```
 
 主專案整合這五個模組
  使用 git subtree 拉進子模組
-
+```
 git subtree add --prefix=packages/employee https://github.com/xxx/employee-module.git main --squash
 git subtree add --prefix=packages/machine https://github.com/xxx/machine-module.git main --squash
+```
 # ...其餘三個模組
 
 之後更新模組只需執行 git subtree pull
-
+```
 git subtree pull --prefix=packages/employee https://github.com/xxx/employee-module.git main --squash
-
+```
 
 主專案啟動整合範例
 
