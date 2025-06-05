@@ -19,7 +19,7 @@ body {
   background: #fff;
   padding: 2.5rem 3rem;
   border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .login-container .ui.header .content {
@@ -28,6 +28,28 @@ body {
   font-size: 2rem;
   letter-spacing: 1.2px;
 }
+
+
+/* 註冊帳號跟忘記密碼的位置 */
+.forgot-register-links {
+  text-align: right;
+  margin: 0rem 0 0.8rem 0;
+  font-size: 1rem;
+}
+
+/* 顯示註冊帳號跟忘記密碼超連結的顏色 */
+.forgot-register-links a {
+  color: #4183c4;
+  /*預設無底線 */
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+/* 滑鼠放上去會顯示底線 */
+.forgot-register-links a:hover {
+  text-decoration: underline;
+}
+
 
 /* 輸入框 */
 .ui.form .field input {
@@ -40,7 +62,7 @@ body {
 
 .ui.form .field input:focus {
   border-color: #7a9bcf !important;
-  box-shadow: 0 0 6px rgba(122,155,207,0.4);
+  box-shadow: 0 0 6px rgba(122, 155, 207, 0.4);
 }
 
 .ui.form .field input::placeholder {
@@ -76,7 +98,7 @@ body {
   height: calc(100vh - 56px);
   padding: 1.2rem 1rem;
   border-radius: 0 14px 14px 0;
-  box-shadow: inset -5px 0 10px -5px rgba(0,0,0,0.04);
+  box-shadow: inset -5px 0 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* 登入者資訊 */
@@ -86,7 +108,7 @@ body {
   padding: 1.3rem 1rem;
   font-size: 1rem;
   color: #4a5189 !important;
-  box-shadow: 0 2px 8px rgba(148,154,203,0.3);
+  box-shadow: 0 2px 8px rgba(148, 154, 203, 0.3);
 }
 
 /* 樹狀選單 樣式 */
@@ -135,19 +157,20 @@ body {
   min-height: 400px;
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
   padding: 2rem 2.5rem;
 }
 
 /* Header */
-h2.ui.header, h3.ui.header {
+h2.ui.header,
+h3.ui.header {
   color: #2a317a;
   font-weight: 700;
   letter-spacing: 0.8px;
 }
 
 /* Sticky sidebar */
-.ui.grid > .column.sidebar-container {
+.ui.grid>.column.sidebar-container {
   position: sticky;
   top: 3.5em;
   align-self: flex-start;
