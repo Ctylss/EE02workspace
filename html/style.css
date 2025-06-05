@@ -1,154 +1,58 @@
-/* 全局字型 */
-body {
-  font-family: "Noto Sans TC", "微軟正黑體", Arial, sans-serif;
-  background: #f9fafb;
-  color: #444;
-  min-height: 100vh;
-}
+ body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f4f6f9;
+    }
 
-/* Login 容器美化 */
-.login-container {
-  height: 100vh;
-  background: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .main-layout {
+      display: flex;
+      height: 100vh;
+      padding-top: 50px; /* 頂部固定選單高度 */
+    }
 
-.login-container .column {
-  background: #fff;
-  padding: 2.5rem 3rem;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
+    .sidebar {
+      width: 260px;
+      background: #ffffff;
+      border-right: 1px solid #ddd;
+      padding: 1rem;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    }
 
-.login-container .ui.header .content {
-  font-weight: 700;
-  color: #5a6a82;
-  font-size: 2rem;
-  letter-spacing: 1.2px;
-}
+    .content-area {
+      flex-grow: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      background-color: #f9fbfd;
+    }
 
-/* 輸入框 */
-.ui.form .field input {
-  height: 44px;
-  font-size: 1.05rem;
-  border: 1.8px solid #dce3eb !important;
-  border-radius: 8px !important;
-  transition: border-color 0.3s ease;
-}
+    .ui.top.menu {
+      z-index: 1000;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
 
-.ui.form .field input:focus {
-  border-color: #7a9bcf !important;
-  box-shadow: 0 0 6px rgba(122,155,207,0.4);
-}
+    .ui.segment.user-info {
+      background: #f0f4f8;
+      border-radius: 10px;
+    }
 
-.ui.form .field input::placeholder {
-  color: #a3a9b8;
-}
+    .ui.segment.user-info .header {
+      color: #2185d0;
+    }
 
-/* 按鈕風格 */
-.ui.teal.submit.button {
-  background: #7a9bcf !important;
-  color: white !important;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: background 0.3s ease;
-}
+    .ui.accordion .title {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
 
-.ui.teal.submit.button:hover {
-  background: #5f7eb7 !important;
-}
+    .ui.accordion .content a.item:hover {
+      background-color: #f0f0f0;
+      color: #2185d0;
+    }
 
-/* Dashboard 相關 */
-.ui.top.fixed.menu {
-  background: #f8f9fb !important;
-  color: #5a6a82 !important;
-  font-weight: 600;
-  font-size: 1.2rem;
-  border-bottom: 1px solid #e6ebf1;
-  box-shadow: none;
-}
-
-/* Sidebar 容器 */
-.sidebar-container {
-  background: #ffffff;
-  height: calc(100vh - 56px);
-  padding: 1.2rem 1rem;
-  border-radius: 0 14px 14px 0;
-  box-shadow: inset -5px 0 10px -5px rgba(0,0,0,0.04);
-}
-
-/* 登入者資訊 */
-.ui.segment.teal.inverted {
-  background: #e4e9f7 !important;
-  border-radius: 12px;
-  padding: 1.3rem 1rem;
-  font-size: 1rem;
-  color: #4a5189 !important;
-  box-shadow: 0 2px 8px rgba(148,154,203,0.3);
-}
-
-/* 樹狀選單 樣式 */
-.ui.accordion .title {
-  font-weight: 600;
-  font-size: 1.05rem;
-  color: #4a5189 !important;
-  cursor: pointer;
-  padding: 0.7em 1em !important;
-  border-radius: 8px;
-  transition: background 0.25s ease;
-}
-
-.ui.accordion .title:hover {
-  background: #eef2fc !important;
-}
-
-.ui.accordion .title.active {
-  background: #c3cce9 !important;
-  color: #2a317a !important;
-}
-
-.ui.accordion .content {
-  padding-left: 1.8em !important;
-  background: #fafbff !important;
-  border-radius: 0 0 12px 12px;
-}
-
-/* 選單項目 */
-.ui.list .item {
-  font-size: 1rem;
-  padding: 0.45em 1em;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-  color: #5a6a82;
-}
-
-.ui.list .item:hover {
-  background-color: #d6defc;
-  color: #2a317a;
-}
-
-/* 內容區 */
-#contentArea.ui.segment {
-  min-height: 400px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 6px 22px rgba(0,0,0,0.06);
-  padding: 2rem 2.5rem;
-}
-
-/* Header */
-h2.ui.header, h3.ui.header {
-  color: #2a317a;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-}
-
-/* Sticky sidebar */
-.ui.grid > .column.sidebar-container {
-  position: sticky;
-  top: 3.5em;
-  align-self: flex-start;
-}
+    .login-container {
+      height: 100vh;
+    }
