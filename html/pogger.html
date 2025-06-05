@@ -3,83 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>工業管理系統 - Semantic UI</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
-  <link rel="stylesheet" href="style.css">
+  <title>工業管理系統 - Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Login -->
-  <div class="ui middle aligned center aligned grid login-container" id="loginContainer">
-    <div class="column" style="max-width: 400px;">
-      <h2 class="ui teal image header">
-        <div class="content">登入工業管理系統</div>
-      </h2>
-      <div class="ui large form">
-        <div class="ui stacked segment">
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="text" id="username" placeholder="使用者帳號">
+<!-- Login -->
+<div class="ui middle aligned center aligned grid login-container" id="loginContainer">
+  <div class="column" style="max-width: 400px;">
+    <h2 class="ui teal image header">
+      <div class="content">登入工業管理系統</div>
+    </h2>
+    <div class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" id="username" placeholder="使用者帳號" />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" id="password" placeholder="密碼" />
+          </div>
+        </div>
+        <div class="field">
+          <select class="ui dropdown" id="role">
+            <option value="user">一般使用者</option>
+            <option value="admin">管理員</option>
+          </select>
+        </div>
+        <button class="ui fluid large teal submit button" onclick="login()">登入</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" style="display: none;">
+  <!-- Top Bar -->
+  <div class="ui top fixed inverted menu">
+    <div class="ui item header">工業管理系統</div>
+    <div class="right menu">
+      <div class="item">
+        <button class="ui inverted button" onclick="logout()">登出</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar + Main Content -->
+  <div class="main-layout">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      <div class="ui segment user-info">
+        <div class="ui small header">使用者資訊</div>
+        <div class="ui list">
+          <div class="item">
+            <i class="user icon"></i>
+            <div class="content">
+              <div class="header">登入者</div>
+              <span id="loggedInUser">使用者</span>
             </div>
           </div>
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="password" id="password" placeholder="密碼">
+          <div class="item">
+            <i class="id badge icon"></i>
+            <div class="content">
+              <div class="header">納編</div>
+              <span id="userId">A123456</span>
             </div>
           </div>
-          <div class="field">
-            <select class="ui dropdown" id="role">
-              <option value="user">一般使用者</option>
-              <option value="admin">管理員</option>
-            </select>
+          <div class="item">
+            <i class="shield alternate icon"></i>
+            <div class="content">
+              <div class="header">權限</div>
+              <span id="userRole">一般使用者</span>
+            </div>
           </div>
-          <button class="ui fluid large teal submit button" onclick="login()">登入</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Dashboard -->
-  <div id="dashboard" style="display: none;">
-    <div class="ui top fixed menu">
-      <div class="ui item">工業管理系統 - Dashboard</div>
-    </div>
-
-    <div class="ui top fixed menu">
-  <div class="ui item">工業管理系統 - Dashboard</div>
-  <div class="right menu">
-    <button class="ui basic button" onclick="logout()">登出</button>
-  </div>
-  </div>
-    <div class="ui grid" style="margin-top: 3.5em;">
-      <!-- Sidebar 左側功能列 -->
-      <div class="four wide column sidebar-container">
-        <!-- 登入者資訊 -->
-        <div class="ui segment teal inverted">
-          👤 登入者：<strong id="loggedInUser">使用者</strong><br>
-          權限：<strong id="userRole">一般使用者</strong>
-        </div>
-
-        <!-- 樹狀選單 -->
-        <div class="ui styled fluid accordion" id="menuAccordion">
-          <!-- 選單項目會由 JS 動態產生 -->
         </div>
       </div>
 
-      <!-- 右側內容區域 -->
-      <div class="twelve wide column">
-        <div id="contentArea" class="ui segment">
-          <h2 class="ui header">歡迎使用工業管理系統</h2>
-          <p>請從左側選單選擇功能</p>
-        </div>
+      <!-- Menu -->
+      <div class="ui styled fluid accordion" id="menuAccordion"></div>
+    </div>
+
+    <!-- Right Content Area -->
+    <div class="content-area">
+      <div id="contentArea" class="ui raised very padded text container segment">
+        <h2 class="ui header">歡迎使用工業管理系統</h2>
+        <p>請從左側選單選擇功能</p>
       </div>
     </div>
   </div>
+</div>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
-  <script src="html.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+<script src="html.js"></script>
 </body>
 </html>
