@@ -23,7 +23,7 @@ management system/
 ├── README.md
 └── .env
 
-📦 各模組子專案架構範例
+📦 各模組專案架構範例
 employee-module/
 ├── config/自己的設定檔案
 │   └── db.config.js
@@ -68,6 +68,4 @@ git subtree pull --prefix=packages/employee https://github.com/xxx/employee-modu
 
 主專案啟動整合範例
 
-FIXIT
-
-我還在想>:(((
+還在更新
