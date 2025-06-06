@@ -2,176 +2,179 @@
 <html lang="zh-Hant">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>工業管理系統 - Semantic UI</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>工業管理系統 - Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <!-- Login -->
-  <div class="ui middle aligned center aligned grid login-container" id="loginContainer">
-    <div class="column" style="max-width: 400px;">
-      <h2 class="ui teal image header">
-        <div class="content">登入工業管理系統</div>
-      </h2>
-      <div class="ui large form">
-        <div class="ui stacked segment">
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="text" id="username" placeholder="使用者帳號">
+    <div class="ui middle aligned center aligned grid login-container" id="loginContainer">
+        <div class="column" style="max-width: 400px;">
+            <h2 class="ui teal image header">
+                <div class="content">登入工業管理系統</div>
+            </h2>
+            <div class="ui large form">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" id="username" placeholder="使用者帳號">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" id="password" placeholder="密碼">
+                        </div>
+                    </div>
+                    <div class="field position-wrapper">
+                        <div class="forgot-register-links">
+                            <a href="#" onclick="showRegister()">註冊帳號</a> |
+                            <a href="#" onclick="showForgotPassword()">忘記密碼？</a>
+                        </div>
+                        <button class="ui fluid large teal submit button" onclick="login()">登入</button>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="password" id="password" placeholder="密碼">
+        </div>
+    </div>
+
+    <div class="ui middle aligned center aligned grid login-container" id="registerContainer" style="display:none;">
+        <div class="column" style="max-width: 400px;">
+            <h2 class="ui teal header">註冊新帳號</h2>
+            <div class="ui form">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <input type="text" id="registerUsername" placeholder="帳號">
+                    </div>
+                    <div class="field">
+                        <input type="password" id="registerPassword" placeholder="密碼">
+                    </div>
+                    <button class="ui fluid teal button" onclick="register()">註冊</button>
+                    <div class="ui message">
+                        已有帳號？<a href="#" onclick="showLogin()">返回登入</a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="field">
-            <select class="ui dropdown" id="role">
-              <option value="user">一般使用者</option>
-              <option value="admin">管理員</option>
-            </select>
-          </div>
-          <!-- 註冊帳號跟忘記密碼和登入按鈕綁再一起 -->
-          <div class="field position-wrapper">
-            <div class="forgot-register-links">
-              <a href="#" onclick="showRegister()">註冊帳號</a> |
-              <a href="#" onclick="showForgotPassword()">忘記密碼？</a>
+        </div>
+    </div>
+
+    <div class="ui middle aligned center aligned grid login-container" id="forgotContainer" style="display:none;">
+        <div class="column" style="max-width: 400px;">
+            <h2 class="ui teal header">找回密碼</h2>
+            <div class="ui form">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <input type="text" id="forgotUsername" placeholder="輸入帳號">
+                    </div>
+                    <button class="ui fluid teal button" onclick="forgotPassword()">重設密碼</button>
+                    <div class="ui message">
+                        <a href="#" onclick="showLogin()">返回登入</a>
+                    </div>
+                </div>
             </div>
-            <button class="ui fluid large teal submit button" onclick="login()">登入</button>
-          </div>
-
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 註冊帳號畫面 -->
-  <div class="ui middle aligned center aligned grid login-container" id="registerContainer" style="display:none;">
-    <div class="column" style="max-width: 400px;">
-      <h2 class="ui teal header">註冊新帳號</h2>
-      <div class="ui form">
-        <div class="ui stacked segment">
-          <div class="field">
-            <input type="text" id="registerUsername" placeholder="帳號">
-          </div>
-          <div class="field">
-            <input type="password" id="registerPassword" placeholder="密碼">
-          </div>
-          <button class="ui fluid teal button" onclick="register()">註冊</button>
-          <div class="ui message">
-            已有帳號？<a href="#" onclick="showLogin()">返回登入</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 忘記密碼畫面 -->
-  <div class="ui middle aligned center aligned grid login-container" id="forgotContainer" style="display:none;">
-    <div class="column" style="max-width: 400px;">
-      <h2 class="ui teal header">找回密碼</h2>
-      <div class="ui form">
-        <div class="ui stacked segment">
-          <div class="field">
-            <input type="text" id="forgotUsername" placeholder="輸入帳號">
-          </div>
-          <button class="ui fluid teal button" onclick="forgotPassword()">重設密碼</button>
-          <div class="ui message">
-            <a href="#" onclick="showLogin()">返回登入</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Dashboard -->
-  <div id="dashboard" style="display: none;">
-    <div class="ui top fixed menu">
-      <div class="ui item">工業管理系統 - Dashboard</div>
     </div>
 
-    <div class="ui top fixed menu">
-      <div class="ui item">工業管理系統 - Dashboard</div>
-      <div class="right menu">
-        <button class="ui basic button" onclick="logout()">登出</button>
-      </div>
+    <div id="dashboard" style="display: none;">
+        <div class="ui top fixed inverted menu">
+            <div class="ui item header">工業管理系統</div>
+            <div class="right menu">
+                <div class="item">
+                    <button class="ui inverted button" onclick="logout()">登出</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-layout">
+            <div class="sidebar">
+                <div class="ui segment user-info">
+                    <div class="ui small header">使用者資訊</div>
+                    <div class="ui list">
+                        <div class="item">
+                            <i class="user icon"></i>
+                            <div class="content">
+                                <div class="header">登入者</div>
+                                <span id="loggedInUser">使用者</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="id badge icon"></i>
+                            <div class="content">
+                                <div class="header">納編</div>
+                                <span id="userId">A123456</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="shield alternate icon"></i>
+                            <div class="content">
+                                <div class="header">權限</div>
+                                <span id="userRole">一般使用者</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui styled fluid accordion" id="menuAccordion"></div>
+            </div>
+
+            <div class="content-area">
+                <div id="contentArea" class="ui raised very padded text container segment">
+                    <h2 class="ui header">歡迎使用工業管理系統</h2>
+                    <p>請從左側選單選擇功能</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="ui grid" style="margin-top: 3.5em;">
-      <!-- Sidebar 左側功能列 -->
-      <div class="four wide column sidebar-container">
-        <!-- 登入者資訊 -->
-        <div class="ui segment teal inverted">
-          👤 登入者：<strong id="loggedInUser">使用者</strong><br>
-          權限：<strong id="userRole">一般使用者</strong>
-        </div>
 
-        <!-- 樹狀選單 -->
-        <div class="ui styled fluid accordion" id="menuAccordion">
-          <!-- 選單項目會由 JS 動態產生 -->
-        </div>
-      </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+    <script>
+        // showRegister切換到註冊畫面, 目前做法是:隱藏登入畫面，顯示註冊畫面，其它畫面隱藏
+        function showRegister() {
+            document.getElementById("loginContainer").style.display = "none";
+            document.getElementById("registerContainer").style.display = "flex";
+            document.getElementById("forgotContainer").style.display = "none";
+        }
 
-      <!-- 右側內容區域 -->
-      <div class="twelve wide column">
-        <div id="contentArea" class="ui segment">
-          <h2 class="ui header">歡迎使用工業管理系統</h2>
-          <p>請從左側選單選擇功能</p>
-        </div>
-      </div>
-    </div>
-  </div>
+        // showForgotPassword切換到忘記密碼畫面, 目前做法是:隱藏登入畫面，顯示忘記密碼畫面，其它畫面隱藏
+        function showForgotPassword() {
+            document.getElementById("loginContainer").style.display = "none";
+            document.getElementById("registerContainer").style.display = "none";
+            document.getElementById("forgotContainer").style.display = "flex";
+        }
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
-  <script>
-    // showRegister切換到註冊畫面, 目前做法是:隱藏登入畫面，顯示註冊畫面，其它畫面隱藏
-    function showRegister() {
-      document.getElementById("loginContainer").style.display = "none";
-      document.getElementById("registerContainer").style.display = "flex";
-      document.getElementById("forgotContainer").style.display = "none";
-    }
-
-    // showForgotPassword切換到忘記密碼畫面, 目前做法是:隱藏登入畫面，顯示忘記密碼畫面，其它畫面隱藏
-    function showForgotPassword() {
-      document.getElementById("loginContainer").style.display = "none";
-      document.getElementById("registerContainer").style.display = "none";
-      document.getElementById("forgotContainer").style.display = "flex";
-    }
-
-    //切換回登入畫面
-    function showLogin() {
-      document.getElementById("loginContainer").style.display = "flex";
-      document.getElementById("registerContainer").style.display = "none";
-      document.getElementById("forgotContainer").style.display = "none";
-    }
-    //註冊帳號功能測試,目前只有當都是空值會跳出"請輸入帳號密碼"的提示
-    function register() {
-      const username = document.getElementById("registerUsername").value;
-      const password = document.getElementById("registerPassword").value;
-      if (!username || !password) {
-        alert("請輸入帳號與密碼");
-        return;
-      }
-      alert("註冊成功（測試階段）！");
-      showLogin();
-    }
-    //忘記密碼功能測試,目前只有當帳號為空值會跳出"請輸入帳號"的提
-    function forgotPassword() {
-      const username = document.getElementById("forgotUsername").value;
-      if (!username) {
-        alert("請輸入帳號");
-        return;
-      }
-      alert("已寄出重設密碼連結（測試階段）！");
-      showLogin();
-    }
-  </script>
-  <script src="html.js"></script>
+        //切換回登入畫面
+        function showLogin() {
+            document.getElementById("loginContainer").style.display = "flex";
+            document.getElementById("registerContainer").style.display = "none";
+            document.getElementById("forgotContainer").style.display = "none";
+        }
+        //註冊帳號功能測試,目前只有當都是空值會跳出"請輸入帳號密碼"的提示
+        function register() {
+            const username = document.getElementById("registerUsername").value;
+            const password = document.getElementById("registerPassword").value;
+            if (!username || !password) {
+                alert("請輸入帳號與密碼");
+                return;
+            }
+            alert("註冊成功（測試階段）！");
+            showLogin();
+        }
+        //忘記密碼功能測試,目前只有當帳號為空值會跳出"請輸入帳號"的提
+        function forgotPassword() {
+            const username = document.getElementById("forgotUsername").value;
+            if (!username) {
+                alert("請輸入帳號");
+                return;
+            }
+            alert("已寄出重設密碼連結（測試階段）！");
+            showLogin();
+        }
+    </script>
+    <script src="html.js"></script>
 </body>
 
 </html>

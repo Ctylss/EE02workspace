@@ -1,177 +1,200 @@
 /* 全局字型 */
 body {
-  font-family: "Noto Sans TC", "微軟正黑體", Arial, sans-serif;
-  background: #f9fafb;
-  color: #444;
-  min-height: 100vh;
+    font-family: "Noto Sans TC", "微軟正黑體", Arial, sans-serif;
+    background: #f9fafb;
+    color: #444;
+    min-height: 100vh;
+    margin: 0; /* Ensure no default body margin */
 }
 
 /* Login 容器美化 */
 .login-container {
-  height: 100vh;
-  background: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 100vh;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-container .column {
-  background: #fff;
-  padding: 2.5rem 3rem;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    padding: 2.5rem 3rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .login-container .ui.header .content {
-  font-weight: 700;
-  color: #5a6a82;
-  font-size: 2rem;
-  letter-spacing: 1.2px;
+    font-weight: 700;
+    color: #5a6a82;
+    font-size: 2rem;
+    letter-spacing: 1.2px;
 }
-
 
 /* 註冊帳號跟忘記密碼的位置 */
 .forgot-register-links {
-  text-align: right;
-  margin: 0rem 0 0.8rem 0;
-  font-size: 1rem;
+    text-align: right;
+    margin: 0rem 0 0.8rem 0;
+    font-size: 1rem;
 }
 
 /* 顯示註冊帳號跟忘記密碼超連結的顏色 */
 .forgot-register-links a {
-  color: #4183c4;
-  /*預設無底線 */
-  text-decoration: none;
-  margin-left: 4px;
+    color: #4183c4;
+    text-decoration: none; /* 預設無底線 */
+    margin-left: 4px;
 }
 
 /* 滑鼠放上去會顯示底線 */
 .forgot-register-links a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
-
 
 /* 輸入框 */
 .ui.form .field input {
-  height: 44px;
-  font-size: 1.05rem;
-  border: 1.8px solid #dce3eb !important;
-  border-radius: 8px !important;
-  transition: border-color 0.3s ease;
+    height: 44px;
+    font-size: 1.05rem;
+    border: 1.8px solid #dce3eb !important;
+    border-radius: 8px !important;
+    transition: border-color 0.3s ease;
 }
 
 .ui.form .field input:focus {
-  border-color: #7a9bcf !important;
-  box-shadow: 0 0 6px rgba(122, 155, 207, 0.4);
+    border-color: #7a9bcf !important;
+    box-shadow: 0 0 6px rgba(122, 155, 207, 0.4);
 }
 
 .ui.form .field input::placeholder {
-  color: #a3a9b8;
+    color: #a3a9b8;
 }
 
 /* 按鈕風格 */
 .ui.teal.submit.button {
-  background: #7a9bcf !important;
-  color: white !important;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: background 0.3s ease;
+    background: #7a9bcf !important;
+    color: white !important;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background 0.3s ease;
 }
 
 .ui.teal.submit.button:hover {
-  background: #5f7eb7 !important;
+    background: #5f7eb7 !important;
 }
 
 /* Dashboard 相關 */
 .ui.top.fixed.menu {
-  background: #f8f9fb !important;
-  color: #5a6a82 !important;
-  font-weight: 600;
-  font-size: 1.2rem;
-  border-bottom: 1px solid #e6ebf1;
-  box-shadow: none;
+    background: #f8f9fb !important;
+    color: #5a6a82 !important;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #e6ebf1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* From develop */
+    z-index: 1000; /* From develop */
+    position: fixed; /* From develop */
+    width: 100%; /* From develop */
+    top: 0; /* From develop */
+    left: 0; /* From develop */
+}
+
+/* Main Layout for Dashboard */
+.main-layout {
+    display: flex;
+    height: 100vh;
+    padding-top: 50px; /* 頂部固定選單高度, from develop to prevent content overlap */
 }
 
 /* Sidebar 容器 */
-.sidebar-container {
-  background: #ffffff;
-  height: calc(100vh - 56px);
-  padding: 1.2rem 1rem;
-  border-radius: 0 14px 14px 0;
-  box-shadow: inset -5px 0 10px -5px rgba(0, 0, 0, 0.04);
+.sidebar {
+    width: 260px; /* From develop */
+    background: #ffffff;
+    padding: 1.2rem 1rem; /* Combined padding from both */
+    border-right: 1px solid #ddd; /* From develop */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05); /* From develop, replacing inset shadow */
+    border-radius: 0 14px 14px 0; /* Retained from new for aesthetics */
+    height: calc(100vh - 50px); /* Adjust height for fixed top menu */
+    position: sticky; /* Sticky sidebar, from new */
+    top: 50px; /* Aligns with top menu */
+    align-self: flex-start; /* For sticky behavior, from new */
+    overflow-y: auto; /* Added for scrollable sidebar if content is long */
 }
 
 /* 登入者資訊 */
-.ui.segment.teal.inverted {
-  background: #e4e9f7 !important;
-  border-radius: 12px;
-  padding: 1.3rem 1rem;
-  font-size: 1rem;
-  color: #4a5189 !important;
-  box-shadow: 0 2px 8px rgba(148, 154, 203, 0.3);
+.ui.segment.user-info {
+    background: #e4e9f7 !important; /* Prioritize new's background */
+    border-radius: 12px; /* Prioritize new's border-radius */
+    padding: 1.3rem 1rem; /* Prioritize new's padding */
+    font-size: 1rem;
+    color: #4a5189 !important; /* Prioritize new's color */
+    box-shadow: 0 2px 8px rgba(148, 154, 203, 0.3); /* Prioritize new's shadow */
 }
+
+.ui.segment.user-info .header {
+    color: #4a5189 !important; /* Match user-info color, override develop's blue */
+}
+
 
 /* 樹狀選單 樣式 */
 .ui.accordion .title {
-  font-weight: 600;
-  font-size: 1.05rem;
-  color: #4a5189 !important;
-  cursor: pointer;
-  padding: 0.7em 1em !important;
-  border-radius: 8px;
-  transition: background 0.25s ease;
+    font-weight: 600; /* Prioritize new's font-weight */
+    font-size: 1.05rem; /* Prioritize new's font-size */
+    color: #4a5189 !important; /* Prioritize new's color */
+    cursor: pointer;
+    padding: 0.7em 1em !important;
+    border-radius: 8px;
+    transition: background 0.25s ease;
 }
 
 .ui.accordion .title:hover {
-  background: #eef2fc !important;
+    background: #eef2fc !important; /* Prioritize new's hover background */
 }
 
 .ui.accordion .title.active {
-  background: #c3cce9 !important;
-  color: #2a317a !important;
+    background: #c3cce9 !important; /* Prioritize new's active background */
+    color: #2a317a !important; /* Prioritize new's active color */
 }
 
 .ui.accordion .content {
-  padding-left: 1.8em !important;
-  background: #fafbff !important;
-  border-radius: 0 0 12px 12px;
+    padding-left: 1.8em !important;
+    background: #fafbff !important; /* Prioritize new's background */
+    border-radius: 0 0 12px 12px;
 }
 
-/* 選單項目 */
+/* 選單項目 (for sub-menu items if any) */
 .ui.list .item {
-  font-size: 1rem;
-  padding: 0.45em 1em;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-  color: #5a6a82;
+    font-size: 1rem;
+    padding: 0.45em 1em;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    color: #5a6a82;
 }
 
 .ui.list .item:hover {
-  background-color: #d6defc;
-  color: #2a317a;
+    background-color: #d6defc;
+    color: #2a317a;
 }
 
-/* 內容區 */
+/* Content Area */
+.content-area {
+    flex-grow: 1; /* From develop */
+    padding: 2rem; /* From develop */
+    overflow-y: auto; /* From develop */
+    background-color: #f9fbfd; /* From develop, slightly different than body background */
+}
+
 #contentArea.ui.segment {
-  min-height: 400px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
-  padding: 2rem 2.5rem;
+    min-height: 400px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+    padding: 2rem 2.5rem;
 }
 
 /* Header */
 h2.ui.header,
 h3.ui.header {
-  color: #2a317a;
-  font-weight: 700;
-  letter-spacing: 0.8px;
+    color: #2a317a;
+    font-weight: 700;
+    letter-spacing: 0.8px;
 }
 
-/* Sticky sidebar */
-.ui.grid>.column.sidebar-container {
-  position: sticky;
-  top: 3.5em;
-  align-self: flex-start;
-}
+/* Removed the specific .ui.grid > .column.sidebar-container as it's now handled by .sidebar directly */

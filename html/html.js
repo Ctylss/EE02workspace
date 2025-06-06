@@ -1,107 +1,134 @@
-function login() {
-  const username = document.getElementById("username").value;
-  const role = document.getElementById("role").value;
-  
+ $(document).ready(function () {
+    const users = [
+      { username: 'admin', password: '1234', role: 'admin', userId: 'A000001' },
+      { username: 'user1', password: '1234', role: 'user', userId: 'B000002' }
+    ];
 
+    const menuData = [
+      {
+        title: '人員及員工管理',
+        key: 'personnel',
+        children: [
+          { title: '員工列表', key: 'employeeList' },
+          { title: '新增員工', key: 'addEmployee' }
+        ]
+      },
+      {
+        title: '設備及機器管理',
+        key: 'equipment',
+        children: [
+          { title: '設備狀態', key: 'equipmentStatus' },
+          { title: '維修記錄', key: 'maintenance' }
+        ]
+      },
+      {
+        title: '工單管理',
+        key: 'workOrders',
+        children: [
+          { title: '工單列表', key: 'workOrderList' },
+          { title: '新增工單', key: 'addWorkOrder' }
+        ]
+      },
+      {
+        title: '生產物料管理',
+        key: 'materials',
+        children: [
+          { title: '庫存查詢', key: 'inventory' },
+          { title: '物料申請', key: 'materialRequest' }
+        ]
+      },
+      {
+        title: '出缺勤及人事管理',
+        key: 'attendance',
+        children: [
+          { title: '出勤紀錄', key: 'attendanceRecords' },
+          { title: '請假申請', key: 'leaveRequests' }
+        ]
+      }
+    ];
 
+    window.login = function () {
+      const username = $('#username').val().trim();
+      const password = $('#password').val().trim();
+      const role = $('#role').val();
 
-  if (!username) {
-    alert("請輸入使用者帳號");
-    return;
-  }
+      if (!username || !password) {
+        alert('請輸入帳號與密碼');
+        return;
+      }
 
-  document.getElementById("loginContainer").style.display = "none";
-  document.getElementById("dashboard").style.display = "block";
-  document.getElementById("loggedInUser").innerText = username;
-  document.getElementById("userRole").innerText = role === "admin" ? "管理員" : "一般使用者";
+      const user = users.find(
+        (u) => u.username === username && u.password === password && u.role === role
+      );
 
-  renderMenu(role);
-  $('.ui.accordion').accordion();
-}
+      if (!user) {
+        alert('帳號或密碼錯誤，或角色不符');
+        return;
+      }
 
-function logout() {
-  // 清空登入欄位（可選）
-  document.getElementById("username").value = "";
-  document.getElementById("password").value = "";
-  document.getElementById("role").value = "user";
+      $('#loginContainer').hide();
+      $('#dashboard').show();
 
-  // 隱藏 Dashboard，顯示登入畫面
-  document.getElementById("dashboard").style.display = "none";
-  document.getElementById("loginContainer").style.display = "flex";
+      $('#loggedInUser').text(user.username);
+      $('#userId').text(user.userId);
+      $('#userRole').text(role === 'admin' ? '管理員' : '一般使用者');
 
-  // 清空使用者資訊和選單
-  document.getElementById("loggedInUser").innerText = "";
-  document.getElementById("userRole").innerText = "";
-  document.getElementById("menuAccordion").innerHTML = "";
+      initMenu();
+      loadContent('歡迎使用工業管理系統', '<p>請從左側選單選擇功能</p>');
+    };
 
-  // 預設內容區回復初始文字
-  const area = document.getElementById("contentArea");
-  area.innerHTML = `<h2 class="ui header">歡迎使用工業管理系統</h2><p>請從左側選單選擇功能</p>`;
-}
+    window.logout = function () {
+      if (confirm('確定要登出嗎？')) {
+        $('#dashboard').hide();
+        $('#loginContainer').show();
+        $('#username').val('');
+        $('#password').val('');
+        $('#role').val('user');
+        $('#menuAccordion').empty();
+        $('#contentArea').html('<h2 class="ui header">歡迎使用工業管理系統</h2><p>請從左側選單選擇功能</p>');
+      }
+    };
 
-function loadContent(contentName) {
-  const area = document.getElementById("contentArea");
-  area.innerHTML = `<h3 class="ui header">${contentName}</h3><p>這是 ${contentName} 的模擬頁面內容。</p>`;
-}
+    function initMenu() {
+      const $accordion = $('#menuAccordion');
+      $accordion.empty();
 
-function renderMenu(role) {
-  const menu = document.getElementById("menuAccordion");
-  menu.innerHTML = "";
-
-  const modules = [
-    {
-      label: "1",
-      color: "orange",
-      title: "人員員工",
-      sub: ["員工列表", "新增員工"]
-    },
-    {
-      label: "2",
-      color: "blue",
-      title: "設備機台",
-      sub: ["機台清單", "保養排程"]
-    },
-    {
-      label: "3",
-      color: "green",
-      title: "工單",
-      sub: ["工單查詢", "建立工單"]
-    },
-    {
-      label: "4",
-      color: "purple",
-      title: "生產物料",
-      sub: ["物料庫存", "物料請領"]
-    },
-    {
-      label: "5",
-      color: "red",
-      title: "出缺勤 / 人資",
-      sub: ["打卡記錄", "請假管理"]
-    }
-  ];
-
-  modules.forEach(module => {
-    const isAdminOnly = ["新增員工", "建立工單", "請假管理"].some(sub => module.sub.includes(sub));
-    if (role === "user" && isAdminOnly) {
-      module.sub = module.sub.filter(item => !["新增員工", "建立工單", "請假管理"].includes(item));
-    }
-
-    if (module.sub.length > 0) {
-      const title = `
-        <div class="title">
-          <i class="dropdown icon"></i>
-          <span class="ui ${module.color} label">${module.label}</span> ${module.title}
-        </div>
-      `;
-      const content = `
-        <div class="content">
-          <div class="ui list">
-            ${module.sub.map(item => `<a class="item" onclick="loadContent('${item}')">${item}</a>`).join("")}
+      menuData.forEach((item) => {
+        const title = $(`
+          <div class="title">
+            <i class="dropdown icon"></i>
+            ${item.title}
           </div>
-        </div>
-      `;
-      menu.innerHTML += title + content;
+        `);
+
+        const content = $('<div class="content"><div class="ui list"></div></div>');
+        const $list = content.find('.list');
+
+        item.children.forEach((child) => {
+          const $childItem = $(`<a class="item" href="#" data-key="${child.key}">${child.title}</a>`);
+          $childItem.on('click', function (e) {
+            e.preventDefault();
+            loadContent(child.title, `<p>這是「${child.title}」功能的內容範例。</p>`);
+            $('#menuAccordion .list .item').removeClass('active');
+            $(this).addClass('active');
+          });
+          $list.append($childItem);
+        });
+
+        $accordion.append(title).append(content);
+      });
+
+      $accordion.accordion({
+        exclusive: false,
+        animateChildren: false,
+        duration: 300
+      });
     }
-  });
-}
+
+    function loadContent(title, html) {
+      $('#contentArea').html(`
+        <h2 class="ui header">${title}</h2>
+        ${html}
+      `);
+    }
+  });   
