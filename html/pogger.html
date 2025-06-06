@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="ui middle aligned center aligned grid login-container" id="loginContainer">
+    <div class="ui middle aligned center aligned login-container" id="loginContainer">
         <div class="column" style="max-width: 400px;">
             <h2 class="ui teal image header">
                 <div class="content">登入工業管理系統</div>
@@ -37,11 +37,12 @@
                         <button class="ui fluid large teal submit button" onclick="login()">登入</button>
                     </div>
                 </div>
+                <div id="loginMessage" class="ui message" style="display: none;"></div>
             </div>
         </div>
     </div>
 
-    <div class="ui middle aligned center aligned grid login-container" id="registerContainer" style="display:none;">
+    <div class="ui middle aligned center aligned login-container" id="registerContainer" style="display:none;">
         <div class="column" style="max-width: 400px;">
             <h2 class="ui teal header">註冊新帳號</h2>
             <div class="ui form">
@@ -57,11 +58,12 @@
                         已有帳號？<a href="#" onclick="showLogin()">返回登入</a>
                     </div>
                 </div>
+                <div id="registerMessage" class="ui message" style="display: none;"></div>
             </div>
         </div>
     </div>
 
-    <div class="ui middle aligned center aligned grid login-container" id="forgotContainer" style="display:none;">
+    <div class="ui middle aligned center aligned login-container" id="forgotContainer" style="display:none;">
         <div class="column" style="max-width: 400px;">
             <h2 class="ui teal header">找回密碼</h2>
             <div class="ui form">
@@ -74,16 +76,17 @@
                         <a href="#" onclick="showLogin()">返回登入</a>
                     </div>
                 </div>
+                <div id="forgotMessage" class="ui message" style="display: none;"></div>
             </div>
         </div>
     </div>
 
     <div id="dashboard" style="display: none;">
-        <div class="ui top fixed inverted menu">
+        <div class="ui top fixed menu">
             <div class="ui item header">工業管理系統</div>
             <div class="right menu">
                 <div class="item">
-                    <button class="ui inverted button" onclick="logout()">登出</button>
+                    <button class="ui button" onclick="logout()">登出</button>
                 </div>
             </div>
         </div>
@@ -121,7 +124,7 @@
             </div>
 
             <div class="content-area">
-                <div id="contentArea" class="ui raised very padded text container segment">
+                <div id="contentArea" class="ui segment">
                     <h2 class="ui header">歡迎使用工業管理系統</h2>
                     <p>請從左側選單選擇功能</p>
                 </div>
@@ -131,49 +134,6 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
-    <script>
-        // showRegister切換到註冊畫面, 目前做法是:隱藏登入畫面，顯示註冊畫面，其它畫面隱藏
-        function showRegister() {
-            document.getElementById("loginContainer").style.display = "none";
-            document.getElementById("registerContainer").style.display = "flex";
-            document.getElementById("forgotContainer").style.display = "none";
-        }
-
-        // showForgotPassword切換到忘記密碼畫面, 目前做法是:隱藏登入畫面，顯示忘記密碼畫面，其它畫面隱藏
-        function showForgotPassword() {
-            document.getElementById("loginContainer").style.display = "none";
-            document.getElementById("registerContainer").style.display = "none";
-            document.getElementById("forgotContainer").style.display = "flex";
-        }
-
-        //切換回登入畫面
-        function showLogin() {
-            document.getElementById("loginContainer").style.display = "flex";
-            document.getElementById("registerContainer").style.display = "none";
-            document.getElementById("forgotContainer").style.display = "none";
-        }
-        //註冊帳號功能測試,目前只有當都是空值會跳出"請輸入帳號密碼"的提示
-        function register() {
-            const username = document.getElementById("registerUsername").value;
-            const password = document.getElementById("registerPassword").value;
-            if (!username || !password) {
-                alert("請輸入帳號與密碼");
-                return;
-            }
-            alert("註冊成功（測試階段）！");
-            showLogin();
-        }
-        //忘記密碼功能測試,目前只有當帳號為空值會跳出"請輸入帳號"的提
-        function forgotPassword() {
-            const username = document.getElementById("forgotUsername").value;
-            if (!username) {
-                alert("請輸入帳號");
-                return;
-            }
-            alert("已寄出重設密碼連結（測試階段）！");
-            showLogin();
-        }
-    </script>
     <script src="html.js"></script>
 </body>
 
