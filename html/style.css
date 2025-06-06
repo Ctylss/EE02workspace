@@ -1,16 +1,18 @@
 /* 全局字型 */
 body {
     font-family: "Noto Sans TC", "微軟正黑體", Arial, sans-serif;
-    background: #f9fafb;
-    color: #444;
+    background: #f8f9fa; /* 更淺的背景，增加明亮度 */
+    color: #343a40; /* 基礎文字顏色，增加一些深度 */
     min-height: 100vh;
-    margin: 0; /* Ensure no default body margin */
+    margin: 0;
+    line-height: 1.6; /* 全局行高，提升可讀性 */
 }
 
-/* Login 容器美化 */
+/* Login 容器美化 (引入綠色漸變，更具現代感) */
 .login-container {
     height: 100vh;
-    background: #ffffff;
+    /* 淺藍色到淺綠色的柔和漸變 */
+    background: linear-gradient(135deg, #e0f2f7 0%, #d4ede6 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,183 +20,409 @@ body {
 
 .login-container .column {
     background: #fff;
-    padding: 2.5rem 3rem;
-    border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    padding: 3.5rem 4rem;
+    border-radius: 12px; /* 統一採用較內斂的圓角 */
+    /* 更為精緻、低調的陰影 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); /* 稍微加強陰影，更立體 */
+    transition: transform 0.3s ease-out;
+}
+
+.login-container .column:hover {
+    transform: translateY(-3px);
 }
 
 .login-container .ui.header .content {
     font-weight: 700;
-    color: #5a6a82;
-    font-size: 2rem;
-    letter-spacing: 1.2px;
+    color: #212529; /* 深色標題 */
+    font-size: 2.2rem;
+    letter-spacing: 0.8px;
+    margin-bottom: 2rem;
+    text-shadow: none;
 }
 
 /* 註冊帳號跟忘記密碼的位置 */
 .forgot-register-links {
-    text-align: right;
-    margin: 0rem 0 0.8rem 0;
-    font-size: 1rem;
+    text-align: right; /* 這些連結保持靠右 */
+    margin: 1.2rem 0 1.5rem 0;
+    font-size: 0.9rem;
 }
 
-/* 顯示註冊帳號跟忘記密碼超連結的顏色 */
+/* 顯示註冊帳號跟忘記密碼超連結的顏色 (保持藍色，作為主要互動色) */
 .forgot-register-links a {
-    color: #4183c4;
-    text-decoration: none; /* 預設無底線 */
-    margin-left: 4px;
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 10px;
+    transition: color 0.2s ease;
 }
 
 /* 滑鼠放上去會顯示底線 */
 .forgot-register-links a:hover {
+    color: #0056b3;
     text-decoration: underline;
 }
 
 /* 輸入框 */
 .ui.form .field input {
-    height: 44px;
+    height: 48px;
     font-size: 1.05rem;
-    border: 1.8px solid #dce3eb !important;
+    border: 1px solid #ced4da !important;
     border-radius: 8px !important;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 0 1rem;
 }
 
 .ui.form .field input:focus {
-    border-color: #7a9bcf !important;
-    box-shadow: 0 0 6px rgba(122, 155, 207, 0.4);
+    border-color: #88aadd !important; /* 焦點邊框改為柔和藍色 */
+    box-shadow: 0 0 0 3px rgba(136, 170, 221, 0.25); /* 更柔和的焦點光暈 */
 }
 
 .ui.form .field input::placeholder {
-    color: #a3a9b8;
+    color: #868e96;
+    opacity: 1;
 }
 
-/* 按鈕風格 */
+/* 按鈕風格 (登入按鈕保持主藍色，但調整 hover 效果) */
 .ui.teal.submit.button {
-    background: #7a9bcf !important;
+    background: #2c5890 !important; /* 主藍色 */
     color: white !important;
     font-weight: 600;
     border-radius: 8px;
-    transition: background 0.3s ease;
+    padding: 1.1rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.2px;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* 輕微陰影 */
 }
 
 .ui.teal.submit.button:hover {
-    background: #5f7eb7 !important;
+    background: #214371 !important; /* 懸停時深一點的主藍色 */
+    transform: translateY(-2px); /* 輕微上浮 */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15); /* 懸停時陰影稍大 */
 }
+
+/* Semantic UI message for register/forgot */
+.ui.message {
+    margin-top: 1.5rem !important;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #495057;
+    background: #e9ecef !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 6px !important;
+    padding: 0.8em 1.2em !important;
+    box-shadow: none;
+}
+
+.ui.message.positive {
+    background-color: #e6ffed !important; /* 成功訊息使用淺綠色背景 */
+    color: #28a745 !important; /* 綠色文字 */
+    border-color: #28a745 !important;
+}
+
+.ui.message.negative {
+    background-color: #ffe6e6 !important; /* 錯誤訊息使用淺紅色背景 */
+    color: #dc3545 !important; /* 紅色文字 */
+    border-color: #dc3545 !important;
+}
+
+.ui.message.warning {
+    background-color: #fff3cd !important; /* 警告訊息使用淺黃色背景 */
+    color: #ffc107 !important; /* 黃色文字 */
+    border-color: #ffc107 !important;
+}
+
+.ui.message a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.ui.message a:hover {
+    text-decoration: underline;
+}
+
 
 /* Dashboard 相關 */
 .ui.top.fixed.menu {
-    background: #f8f9fb !important;
-    color: #5a6a82 !important;
+    background: #ffffff !important;
+    color: #343a40 !important;
     font-weight: 600;
     font-size: 1.2rem;
-    border-bottom: 1px solid #e6ebf1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* From develop */
-    z-index: 1000; /* From develop */
-    position: fixed; /* From develop */
-    width: 100%; /* From develop */
-    top: 0; /* From develop */
-    left: 0; /* From develop */
+    border-bottom: 1px solid #e9ecef;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0.7rem 0;
 }
+
+.ui.top.fixed.menu .ui.item.header {
+    padding-left: 2rem;
+    font-weight: 700;
+    color: #2c5890; /* 頂部標題使用主品牌色 */
+}
+
+.ui.top.fixed.menu .right.menu .item button {
+    background-color: #ffffff !important;
+    color: #2c5890 !important; /* 藍色文字 */
+    border: 1px solid #a3c2de !important; /* 柔和的藍色邊框 */
+    border-radius: 6px !important;
+    font-weight: 600;
+    padding: 0.5em 1em;
+    transition: all 0.2s ease;
+}
+
+.ui.top.fixed.menu .right.menu .item button:hover {
+    background-color: #f0f2f5 !important;
+    color: #214371 !important;
+    border-color: #2c5890 !important; /* 懸停時邊框顏色變深 */
+}
+
 
 /* Main Layout for Dashboard */
 .main-layout {
     display: flex;
     height: 100vh;
-    padding-top: 50px; /* 頂部固定選單高度, from develop to prevent content overlap */
+    padding-top: 60px; /* 根據頂部選單高度調整 */
 }
 
 /* Sidebar 容器 */
 .sidebar {
-    width: 260px; /* From develop */
+    width: 260px;
     background: #ffffff;
-    padding: 1.2rem 1rem; /* Combined padding from both */
-    border-right: 1px solid #ddd; /* From develop */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05); /* From develop, replacing inset shadow */
-    border-radius: 0 14px 14px 0; /* Retained from new for aesthetics */
-    height: calc(100vh - 50px); /* Adjust height for fixed top menu */
-    position: sticky; /* Sticky sidebar, from new */
-    top: 50px; /* Aligns with top menu */
-    align-self: flex-start; /* For sticky behavior, from new */
-    overflow-y: auto; /* Added for scrollable sidebar if content is long */
+    padding: 1.5rem 1rem;
+    border-right: 1px solid #e0e6eb;
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.03); /* 更輕的陰影 */
+    border-radius: 0;
+    height: calc(100vh - 60px);
+    position: sticky;
+    top: 60px;
+    align-self: flex-start;
+    overflow-y: auto;
+    padding-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-/* 登入者資訊 */
+/* 登入者資訊 (更柔和的背景和色彩) */
 .ui.segment.user-info {
-    background: #e4e9f7 !important; /* Prioritize new's background */
-    border-radius: 12px; /* Prioritize new's border-radius */
-    padding: 1.3rem 1rem; /* Prioritize new's padding */
-    font-size: 1rem;
-    color: #4a5189 !important; /* Prioritize new's color */
-    box-shadow: 0 2px 8px rgba(148, 154, 203, 0.3); /* Prioritize new's shadow */
+    background: linear-gradient(135deg, #f0f5fa 0%, #e8f3ee 100%) !important; /* 藍綠漸變背景 */
+    border-radius: 8px;
+    padding: 1.2rem;
+    font-size: 0.9rem;
+    color: #495057 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* 輕微陰影 */
+    margin-bottom: 0;
+    border: 1px solid #dbe2e8; /* 淺邊框 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .ui.segment.user-info .header {
-    color: #4a5189 !important; /* Match user-info color, override develop's blue */
+    color: #2c5890 !important;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    text-align: center; /* 「使用者資訊」這個標題保持置中 */
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(44, 88, 144, 0.1);
+    letter-spacing: 0.2px;
 }
 
+.ui.segment.user-info .ui.list {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
 
-/* 樹狀選單 樣式 */
+/* 修正使用者資訊區塊內項目 (圖標、標題、值) 的對齊問題 */
+.ui.segment.user-info .ui.list .item {
+    padding: 0;
+    display: flex;
+    align-items: center; /* 垂直居中對齊圖標和文字 */
+    gap: 8px; /* 圖標和文字間距 */
+    color: #495057;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.ui.segment.user-info .ui.list .item .content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row; /* 橫向排列 */
+    justify-content: space-between; /* 讓標題和值分開靠兩邊 */
+    align-items: center; /* 垂直居中對齊 */
+    padding-top: 0;
+}
+
+.ui.segment.user-info .ui.list .item .header {
+    font-weight: 500;
+    color: #343a40;
+    margin: 0;
+    white-space: nowrap;
+    text-align: left; /* 確保「登入者」等文字靠左 */
+    flex-shrink: 0; /* 防止壓縮 */
+}
+
+.ui.segment.user-info .ui.list .item span {
+    color: #2c5890;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: right; /* 確保「admin」等值靠右 */
+    flex-shrink: 0; /* 防止壓縮 */
+}
+
+.ui.segment.user-info .ui.list .item i.icon {
+    color: #4CAF50; /* 將使用者資訊圖標改為綠色，作為輔助色 */
+    font-size: 1.1em;
+    min-width: 20px;
+    text-align: left; /* 確保圖標靠左 */
+}
+
+/* 樹狀選單 樣式 (主菜單項目 - 引入綠色活躍色) */
+.ui.styled.fluid.accordion {
+    width: 100%;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
 .ui.accordion .title {
-    font-weight: 600; /* Prioritize new's font-weight */
-    font-size: 1.05rem; /* Prioritize new's font-size */
-    color: #4a5189 !important; /* Prioritize new's color */
+    font-weight: 500;
+    font-size: 1rem;
+    color: #495057 !important;
     cursor: pointer;
-    padding: 0.7em 1em !important;
-    border-radius: 8px;
-    transition: background 0.25s ease;
+    /* 調整主菜單的左側內邊距，使其有適當縮排，如圖片所示 */
+    padding: 0.9em 1.2em 0.9em 1.2em !important; /* 上 右 下 左 - 確保左右 padding 一致，視覺上更平衡 */
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center; /* 垂直居中對齊箭頭和文字 */
+    gap: 8px; /* 箭頭和文字之間的小間距 */
+    background-color: transparent !important;
+    position: relative;
+    margin-bottom: 0.2rem;
+    /* 確保箭頭和文字都靠左對齊 */
+    justify-content: flex-start; /* 讓所有內容都靠左 */
 }
 
 .ui.accordion .title:hover {
-    background: #eef2fc !important; /* Prioritize new's hover background */
+    background: #e9ecef !important; /* 懸停背景改為淺灰 */
+    color: #2c5890 !important; /* 懸停文字顏色為主藍色 */
+    transform: none;
+    box-shadow: none;
 }
 
 .ui.accordion .title.active {
-    background: #c3cce9 !important; /* Prioritize new's active background */
-    color: #2a317a !important; /* Prioritize new's active color */
+    /* 活躍狀態背景使用淺綠色，搭配藍色文字 */
+    background: #e6ffed !important; /* 淺綠色 */
+    color: #2c5890 !important; /* 活躍狀態文字顏色，主藍色 */
+    font-weight: 600;
+    /* 左側指示條使用較深的綠色，與背景形成層次 */
+    box-shadow: inset 3px 0 0 #4CAF50; /* 綠色指示條 */
+    margin-bottom: 0.2rem;
+}
+
+.ui.accordion .title i.dropdown.icon {
+    font-size: 1em;
+    color: #6c757d; /* 默認箭頭顏色 */
+    transition: transform 0.2s ease, color 0.2s ease;
+    margin-right: 0 !important; /* 確保箭頭沒有多餘的右邊距 */
+    margin-left: 0 !important; /* 確保箭頭沒有多餘的左邊距 */
+}
+
+.ui.accordion .title.active i.dropdown.icon {
+    transform: rotate(90deg);
+    color: #4CAF50; /* 活躍狀態箭頭顏色為綠色 */
 }
 
 .ui.accordion .content {
-    padding-left: 1.8em !important;
-    background: #fafbff !important; /* Prioritize new's background */
-    border-radius: 0 0 12px 12px;
+    /* 調整縮排，讓子菜單項目有層次感 */
+    padding-left: 2.8em !important; /* 微調縮排，讓子選單層次更舒適 */
+    background: #f8f9fa !important; /* 更淺的子選單背景 */
+    border-radius: 0 0 6px 6px;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+    margin-bottom: 0.6rem; /* 保持與下一個主選單的間距 */
+    overflow: hidden; /* 確保圓角和邊線顯示正確 */
 }
 
-/* 選單項目 (for sub-menu items if any) */
+/* 選單項目 (子菜單項目 - 簡潔、高效、有色彩變化) */
 .ui.list .item {
-    font-size: 1rem;
-    padding: 0.45em 1em;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
+    font-size: 0.95rem;
+    padding: 0.6em 1em 0.6em 0.8em !important; /* 調整 padding，讓文字有更自然的靠左對齊和右邊距 */
+    border-radius: 6px; /* 圓角更明顯，更有設計感 */
+    transition: all 0.2s ease;
     cursor: pointer;
-    color: #5a6a82;
+    color: #555;
+    position: relative;
+    white-space: nowrap;
+    text-align: left; /* 恢復靠左對齊，這是商業形式選單的常見做法 */
+    display: block; /* 確保行為可控 */
+    margin-bottom: 0.1rem; /* 讓子項目之間有微小的間距 */
+}
+
+.ui.list .item:last-child {
+    margin-bottom: 0; /* 最後一個子項目下方不留空間 */
 }
 
 .ui.list .item:hover {
-    background-color: #d6defc;
-    color: #2a317a;
+    background-color: #e9f5ff; /* 淺藍色懸停背景，更柔和 */
+    color: #2c5890; /* 懸停文字顏色與主藍色統一 */
+    transform: none;
+    box-shadow: inset 3px 0 0 #88aadd; /* 左側細緻的藍色指示條 */
 }
+
+.ui.list .item.active {
+    /* 活躍子項目背景使用更深的淺綠色，文字使用藍色 */
+    background-color: #dbe2e8 !important; /* 柔和的淺灰色，或可以嘗試 #e6ffed 與主選單統一 */
+    color: #2c5890 !important; /* 活躍文字顏色為主藍色 */
+    font-weight: 600;
+    /* 左側指示條使用深藍色，與文字顏色協調 */
+    box-shadow: inset 3px 0 0 #2c5890; /* 更專業的深藍色指示條 */
+}
+
+/* 確保 Semantic UI 預設樣式不會衝突 */
+.ui.accordion .content .ui.list {
+    margin: 0 !important;
+}
+
 
 /* Content Area */
 .content-area {
-    flex-grow: 1; /* From develop */
-    padding: 2rem; /* From develop */
-    overflow-y: auto; /* From develop */
-    background-color: #f9fbfd; /* From develop, slightly different than body background */
+    flex-grow: 1;
+    padding: 2.5rem;
+    overflow-y: auto;
+    background-color: #f8f9fa; /* 與 body 背景一致 */
 }
 
 #contentArea.ui.segment {
-    min-height: 400px;
+    min-height: 600px;
     background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
-    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem 3rem;
+    border: 1px solid #e9ecef;
 }
 
 /* Header */
 h2.ui.header,
 h3.ui.header {
-    color: #2a317a;
+    color: #212529;
     font-weight: 700;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    text-shadow: none;
 }
 
-/* Removed the specific .ui.grid > .column.sidebar-container as it's now handled by .sidebar directly */
+p {
+    line-height: 1.7;
+    color: #555;
+}
