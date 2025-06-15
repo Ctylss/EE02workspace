@@ -1,38 +1,38 @@
 CREATE TABLE machines (
-    id INT PRIMARY KEY IDENTITY(1,1),          -- ¾÷¾¹ID
-    name VARCHAR(50),                          -- ¾÷¾¹¦WºÙ
-    mstatus VARCHAR(20),                        -- ª¬ºA¡]¦p¡G¹BÂà¤¤/ºû­×¤¤¡^
-    location VARCHAR(50)                       -- ¾÷¾¹¦ì¸m
+    id INT PRIMARY KEY IDENTITY(1,1),          -- ï¿½ï¿½ï¿½ï¿½ID
+    name VARCHAR(50),                          -- ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½
+    mstatus VARCHAR(20),                        -- ï¿½ï¿½ï¿½Aï¿½]ï¿½pï¿½Gï¿½Bï¿½à¤¤/ï¿½ï¿½ï¿½×¤ï¿½ï¿½^
+    location VARCHAR(50)                       -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½m
 );
 
 CREATE TABLE machineService (
-    id INT PRIMARY KEY IDENTITY(1,1),          -- ªA°È¬ö¿ýID
-    machineId INT,                             -- ©ÒÄÝ¾÷¾¹ID
-    type VARCHAR(20),                          -- Ãþ«¬¡]Repair ©Î Maintenance¡^
-    description TEXT,                          -- °ÝÃD´y­z / «O¾i»¡©ú
-    serviceTime DATETIME,                      -- ¦^³ø®É¶¡ / ±Æµ{®É¶¡
-    msstatus VARCHAR(20),                        -- ª¬ºA¡]¦p¡GPending¡BIn Progress¡BCompleted¡^
-    employeeId INT,                            -- ºûÅ@¤H­ûID¡]¥i³s¤H­ûºÞ²z¼Ò²Õ¡^
+    id INT PRIMARY KEY IDENTITY(1,1),          -- ï¿½Aï¿½È¬ï¿½ï¿½ï¿½ID
+    machineId INT,                             -- ï¿½ï¿½ï¿½Ý¾ï¿½ï¿½ï¿½ID
+    type VARCHAR(20),                          -- ï¿½ï¿½ï¿½ï¿½ï¿½]Repair ï¿½ï¿½ Maintenanceï¿½^
+    description TEXT,                          -- ï¿½ï¿½ï¿½Dï¿½yï¿½z / ï¿½Oï¿½iï¿½ï¿½ï¿½ï¿½
+    serviceTime DATETIME,                      -- ï¿½^ï¿½ï¿½ï¿½É¶ï¿½ / ï¿½Æµ{ï¿½É¶ï¿½
+    msstatus VARCHAR(20),                        -- ï¿½ï¿½ï¿½Aï¿½]ï¿½pï¿½GPendingï¿½BIn Progressï¿½BCompletedï¿½^
+    employeeId INT,                            -- ï¿½ï¿½ï¿½@ï¿½Hï¿½ï¿½IDï¿½]ï¿½iï¿½sï¿½Hï¿½ï¿½ï¿½Þ²zï¿½Ò²Õ¡^
     FOREIGN KEY (machineId) REFERENCES machines(id)
 );
 
 CREATE TABLE machineFiles (
-    id INT PRIMARY KEY IDENTITY(1,1),              -- ÀÉ®×ID
-    machineId INT,                                 -- ©ÒÄÝ¾÷¾¹ID
-    fileName VARCHAR(100),                         -- ÀÉ®×¦WºÙ
-    filePath VARCHAR(255),                         -- Àx¦s¸ô®|
-    uploadTime DATETIME NOT NULL,				   -- ¤W¶Ç®É¶¡
+    id INT PRIMARY KEY IDENTITY(1,1),              -- ï¿½É®ï¿½ID
+    machineId INT,                                 -- ï¿½ï¿½ï¿½Ý¾ï¿½ï¿½ï¿½ID
+    fileName VARCHAR(100),                         -- ï¿½É®×¦Wï¿½ï¿½
+    filePath VARCHAR(255),                         -- ï¿½xï¿½sï¿½ï¿½ï¿½|
+    uploadTime DATETIME NOT NULL,				   -- ï¿½Wï¿½Ç®É¶ï¿½
     FOREIGN KEY (machineId) REFERENCES machines(id)
 );
 
 --CREATE TABLE machineLogs (
---    id INT PRIMARY KEY IDENTITY(1,1),              -- ¬ö¿ý½s¸¹¡A¦Û°Ê»¼¼W¥DÁä
---    machineId INT NOT NULL,                         -- ©ÒÄÝ¾÷¾¹ID¡]¥~Áä¡A°Ñ¦Òmachinesªíªºid¡^
---    logTime DATETIME NOT NULL DEFAULT GETDATE(),   -- ¬ö¿ý®É¶¡¡A¹w³]¬°·í«e®É¶¡
---    temperature FLOAT,                              -- ¾÷¾¹·í®Éªº·Å«×¡]Äá¤ó«×¡^
---    rpm INT,                                       -- ¾÷¾¹¨C¤ÀÄÁÂà³t¡]RPM¡^
---    runStatus VARCHAR(20),                          -- ¹BÂàª¬ºA¡]¨Ò¦p¡GRunning¡BIdle¡BError¡^
---    voltage FLOAT,                                  -- ¹qÀ£¡]¥ñ¯S¡^
---    currentAmp FLOAT,                               -- ¹q¬y¡]¦w°ö¡^
+--    id INT PRIMARY KEY IDENTITY(1,1),              -- ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Aï¿½Û°Ê»ï¿½ï¿½Wï¿½Dï¿½
+--    machineId INT NOT NULL,                         -- ï¿½ï¿½ï¿½Ý¾ï¿½ï¿½ï¿½IDï¿½]ï¿½~ï¿½ï¿½Aï¿½Ñ¦ï¿½machinesï¿½ï¿½ï¿½ï¿½idï¿½^
+--    logTime DATETIME NOT NULL DEFAULT GETDATE(),   -- ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½Aï¿½wï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½É¶ï¿½
+--    temperature FLOAT,                              -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éªï¿½ï¿½Å«×¡]ï¿½ï¿½ï¿½×¡^
+--    rpm INT,                                       -- ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½]RPMï¿½^
+--    runStatus VARCHAR(20),                          -- ï¿½Bï¿½àª¬ï¿½Aï¿½]ï¿½Ò¦pï¿½GRunningï¿½BIdleï¿½BErrorï¿½^
+--    voltage FLOAT,                                  -- ï¿½qï¿½ï¿½ï¿½]ï¿½ï¿½Sï¿½^
+--    currentAmp FLOAT,                               -- ï¿½qï¿½yï¿½]ï¿½wï¿½ï¿½ï¿½^
 --    FOREIGN KEY (machineId) REFERENCES machines(id)
 --);
