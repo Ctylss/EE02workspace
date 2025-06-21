@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 public class DBUtil {
 	public static Connection getConnection() throws Exception {
 		Context context = new InitialContext();
-		DataSource ds = (DataSource) context.lookup("java:/comp/env/jdbc/servdb");
+		DataSource ds = (DataSource) context.lookup("java:/comp/env/jdbc/machineDB");
 		return ds.getConnection();
 	}
 }

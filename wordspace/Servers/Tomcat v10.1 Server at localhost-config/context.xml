@@ -28,6 +28,6 @@
     -->
        <ResourceLink 
     type="javax.sql.DataSource"
-    global="jdbc/servdb"
-    name="jdbc/servdb" />
+    global="jdbc/machineDB"
+    name="jdbc/machineDB" />
 </Context>
