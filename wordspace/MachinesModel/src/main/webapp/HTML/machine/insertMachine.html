@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>新增機台資料</title>
+</head>
+<body>
+    <h2>新增機台資料</h2>
+
+    <!-- 表單會送到你的 Servlet -->
+    <form action="/MachinesModel/InsertMachineServlet" method="post">
+        <label for="machineName">機台名稱：</label>
+        <input type="text" id="machineName" name="machineName" required><br><br>
+
+        <label for="serialNumber">出廠編號：</label>
+        <input type="text" id="serialNumber" name="serialNumber" required><br><br>
+
+        <label for="mstatus">狀態：</label>
+        <input type="text" id="mstatus" name="mstatus" placeholder="預設為待機"><br><br>
+
+        <label for="machineLocation">機台位置：</label>
+        <input type="text" id="machineLocation" name="machineLocation"><br><br>
+
+        <button type="submit">送出</button>
+    </form>
+</body>
+</html>
