@@ -15,42 +15,29 @@
 
     <mvc:annotation-driven/>
 
-    <!-- 配置組件掃描：確保掃描到控制器、服務和儲存庫層 -->
-    <context:component-scan base-package="com.example"/>
+    <context:component-scan base-package="com.mes, com.example"/>
 
-    <!-- 配置視圖解析器： -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/JSP/yw/"/>
-        <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="/JSP/"/> <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 配置靜態資源處理： -->
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/JS/**" location="/JS/"/>
+    <mvc:resources mapping="/common/**" location="/common/"/>
 
-    <!-- ==================================================================== -->
-    <!-- Spring Data JPA 配置 -->
-    <!-- ==================================================================== -->
 
-    <!-- 啟用 Spring Data JPA 儲存庫： -->
-    <jpa:repositories base-package="com.example.dao"/>
+    <jpa:repositories base-package="com.example.dao, com.mes.dao"/>
 
-    <!-- 配置資料源 (DataSource)：
-         這是連接資料庫的關鍵。你需要根據你的 SQL Server 配置進行調整。
-         這裡只是一個範例，請替換為你的實際資料庫連接資訊。
-         已添加 trustServerCertificate=true 來解決 SSL 憑證問題。
-    -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-        <!-- IMPORTANT: Update your actual database name, username, and password -->
         <property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=jdbcDB;encrypt=true;trustServerCertificate=true"/>
         <property name="username" value="testuser"/>
         <property name="password" value="password"/>
     </bean>
 
-    <!-- 配置 JPA 實體管理器工廠 (EntityManagerFactory)： -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.example.model"/>
+        <property name="packagesToScan" value="com.mes.bean, com.example.model"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
@@ -59,18 +46,14 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
-                <!-- 其他 Hibernate 屬性，例如 DDL 自動更新 (開發環境可選) -->
-                <!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
             </props>
         </property>
     </bean>
 
-    <!-- 配置 JPA 事務管理器 (TransactionManager)： -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <!-- 啟用 Spring 的事務註解驅動功能 (@Transactional) -->
     <context:annotation-config/>
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 

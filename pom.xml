@@ -5,12 +5,10 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 引入 Spring Boot Starter Parent 來管理依賴版本 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version> <!-- 與你現有的 spring-boot-starter-data-jpa 版本保持一致 -->
-        <relativePath/> <!-- 從遠端倉庫查找父 POM -->
+        <version>3.2.5</version> <relativePath/>
     </parent>
 
     <groupId>com.example</groupId>
@@ -22,108 +20,56 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- 保持其他非 Spring/Jakarta EE 相關的依賴版本 -->
         <sqlserver.jdbc.version>12.6.1.jre11</sqlserver.jdbc.version>
+        <lombok.version>1.18.30</lombok.version>
         <jackson.version>2.16.1</jackson.version>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
         <gson.version>2.10.1</gson.version>
-        <!-- 移除 jakarta.servlet.api.version 和 jakarta.jstl.version，由父 POM 管理 -->
-        <!-- <jakarta.servlet.api.version>6.0.0</jakarta.servlet.api.version> -->
-        <!-- <jakarta.jstl.version>3.0.1</jakarta.jstl.version> -->
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Web Starter 會自動引入 Spring WebMVC 和 Jakarta Servlet API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!-- 版本由父 POM 管理 -->
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Spring Boot Starter Data JPA 會自動引入 Hibernate 和 Jakarta Persistence API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <!-- 版本由父 POM 管理 -->
         </dependency>
 
-        <!-- 如果是部署到外部 Tomcat，需要將內嵌的 Tomcat 依賴設置為 provided -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- 移除顯式的 jakarta.servlet-api，因為 spring-boot-starter-web 會處理它 -->
-        <!--
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>${jakarta.servlet.api.version}</version>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
             <scope>provided</scope>
         </dependency>
-        -->
 
-        <!-- 移除顯式的 hibernate-core，因為 spring-boot-starter-data-jpa 會引入兼容版本 -->
-        <!--
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>7.0.0.Final</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
-        -->
 
-        <!-- 移除顯式的日誌相關依賴，讓 Spring Boot Starter Logging 自動管理 -->
-        <!--
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.13</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.5.6</version>
-        </dependency>
-        -->
-
-        <!-- SQL Server JDBC 驅動，保持不變 -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>${sqlserver.jdbc.version}</version>
         </dependency>
 
-        <!-- 移除顯式的 spring-webmvc，已被 spring-boot-starter-web 取代 -->
-        <!--
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>5.3.32</version>
-        </dependency>
-        -->
-
-        <!-- Jakarta JSTL 依賴，版本將由父 POM 管理 -->
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-            <!-- 版本由父 POM 管理，或如果你需要非常特定的版本，可以保留 -->
-            <!-- <version>${jakarta.jstl.version}</version> -->
         </dependency>
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-            <!-- 版本由父 POM 管理，或如果你需要非常特定的版本，可以保留 -->
-            <!-- <version>${jakarta.jstl.version}</version> -->
-        </dependency>
+            <scope>runtime</scope> </dependency>
 
-        <!-- Jackson 依賴，版本可以由父 POM 管理或保持顯式 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -139,23 +85,26 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
-        <!-- Gson 依賴，保持不變 -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip> </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
+                <version>3.13.0</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -165,7 +114,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>${maven-war-plugin.version}</version>
+                <version>3.4.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>

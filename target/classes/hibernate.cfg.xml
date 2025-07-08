@@ -17,5 +17,9 @@
 
 
         <mapping class="com.example.model.Product"/>
+            <mapping class="com.mes.bean.Material"/>
+        <mapping class="com.mes.bean.Order"/>
+        <mapping class="com.mes.bean.OrderItem"/>
+        <mapping class="com.mes.bean.Supplier"/>
         </session-factory>
 </hibernate-configuration>
