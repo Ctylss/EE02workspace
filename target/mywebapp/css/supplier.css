@@ -1,5 +1,21 @@
 @charset "UTF-8";
 
+
+.main-right-content-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+.actual-page-content {
+    width: 100% !important;
+    max-width: 1800px !important;
+    padding: 30px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+}
+
+
 /* 標題 */
 h2 {
     text-align: center;
@@ -51,15 +67,16 @@ button {
 button:hover {
     background-color: #0b7dda;
 }
+
 /* 表格格線設定 */
 table {
     width: 100%;
-    border-collapse: collapse; /* ✅ 合併格線，否則會雙線 */
+    border-collapse: collapse;
     table-layout: fixed;
 }
 
 th, td {
-    border: 1px solid #ccc;   /* ✅ 顯示格線 */
+    border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
     word-break: break-word;
@@ -91,7 +108,6 @@ td .button {
     display: inline-block;
     font-weight: bold;
 }
-
 
 .btn-danger:hover {
     background-color: #d32f2f;

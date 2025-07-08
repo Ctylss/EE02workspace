@@ -1,6 +1,9 @@
 package com.example.dao.util;
 
-import com.example.model.Product; // 確保這裡導入了 Product 類
+// 确保导入了所有需要映射的实体类
+import com.mes.bean.Supplier; // <-- 新增：导入 Supplier 类
+import com.mes.bean.Material; // <-- 新增：导入 Material 类
+import com.example.model.Product; // 保持不变，Product 已经存在
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,17 +27,19 @@ public class HibernateUtil {
 
     static {
         try {
-            // 從 hibernate.cfg.xml 載入配置
+            // 从 hibernate.cfg.xml 载入配置
             serviceRegistry = new StandardServiceRegistryBuilder()
-                    .configure("hibernate.cfg.xml") // 加載 hibernate.cfg.xml
+                    .configure("hibernate.cfg.xml") // 加载 hibernate.cfg.xml
                     .build();
 
             // 建立 MetadataSources
             MetadataSources metadataSources = new MetadataSources(serviceRegistry);
 
-            // ====== 關鍵一步：添加映射的實體類 =======
-            // 您必須明確告訴 Hibernate 哪些類是實體
-            metadataSources.addAnnotatedClass(Product.class); // <-- 確保您的 Product.class 在這裡被添加了
+            // ====== 关键一步：添加所有映射的实体类 =======
+            // 您必须明确告诉 Hibernate 哪些类是实体
+            metadataSources.addAnnotatedClass(Product.class); // 保持不变
+            metadataSources.addAnnotatedClass(Supplier.class); // **新增：添加 Supplier 实体**
+            metadataSources.addAnnotatedClass(Material.class); // **新增：添加 Material 实体**
 
             Metadata metadata = metadataSources.getMetadataBuilder().build();
 
@@ -46,7 +51,7 @@ public class HibernateUtil {
             if (serviceRegistry != null) {
                 StandardServiceRegistryBuilder.destroy(serviceRegistry);
             }
-            throw new ExceptionInInitializerError(e); // 將異常包裝起來
+            throw new ExceptionInInitializerError(e); // 将异常包装起来
         }
     }
 
@@ -65,7 +70,7 @@ public class HibernateUtil {
         }
     }
 
-    // 輔助方法：回滾事務
+    // 辅助方法：回滚事务
     public static void rollbackTransaction(Transaction transaction) {
         if (transaction != null && transaction.isActive()) {
             try {

@@ -6,7 +6,7 @@
     <title>新增供應商</title>
 
     <!-- 共用樣式 -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/stylee.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>../css/stylee.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/supplier.css">
 
     <!-- JS -->
