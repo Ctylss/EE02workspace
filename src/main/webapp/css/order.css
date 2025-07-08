@@ -1,89 +1,131 @@
 @charset "UTF-8";
-      .inner-page {
+
+/* 假設 sidebar 寬度固定為 220px */
+.main-content {
+    margin-left: 220px;
+    padding: 30px;
+    box-sizing: border-box;
+    flex: 1;
+    min-width: 0;  
+}
+
+.inner-page {
     background-color: #fff;
     padding: 30px;
-    margin: 0;
+    margin: 0 auto;
     width: 100%;
-   
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    max-width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
     box-sizing: border-box;
 }
 
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* 讓表單欄位換行排列 */
+    gap: 20px;
+    margin-bottom: 20px;
+}
 
-        .form-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 200px;
+    flex: 1; /* 每個表單欄位平均分寬 */
+}
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+label {
+    font-weight: bold;
+    color: #555;
+}
 
-        label {
-            font-weight: bold;
-            color: #555;
-        }
+input,
+select {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        input,
-        select {
-            padding: 6px 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 200px;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-        }
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
+th {
+    background-color: #f0f0f0;
+    color: #333;
+}
 
-        th {
-            background-color: #f0f0f0;
-            color: #333;
-        }
+.total {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
 
-        .total {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 20px;
-            font-size: 1.1em;
-        }
+button {
+    padding: 6px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
 
-        button {
-            padding: 6px 12px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
+button:hover {
+    background-color: #388E3C;
+}
 
-        button:hover {
-            background-color: #388E3C;
-        }
+.delete-btn {
+    background-color: #f44336;
+}
 
-        .delete-btn {
-            background-color: #f44336;
-        }
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+/* 讓外層容器撐滿整個畫面 */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
 
-        .delete-btn:hover {
-            background-color: #d32f2f;
-        }
+/* 最外層容器滿版寬度 */
+.content {
+    display: flex;
+    width: 100%;
+    min-height: 100vh; /* 避免出現空白 */
+}
+
+/* 包含 sidebar 和 main-content 的容器 */
+.app-wrapper {
+    display: flex;
+    flex: 1;
+}
+
+.actual-page-content {
+    max-width: 1800px;
+    width: 100%;
+    margin: 0 auto;         /*  讓內容置中 */
+    padding: 30px;
+    box-sizing: border-box;
+}

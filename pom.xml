@@ -40,7 +40,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <!-- 版本由父 POM 管理 -->
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Spring Boot Starter Data JPA 會自動引入 Hibernate 和 Jakarta Persistence API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
