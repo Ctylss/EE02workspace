@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 啟用 Spring MVC 的注解驅動功能。 -->
+    <mvc:annotation-driven/>
+
+    <!-- 配置組件掃描：
+         現在掃描範圍擴展到包含控制器和服務層的套件。
+         請將 "com.example" 替換為你專案的根套件，
+         這樣 Spring 會掃描該套件及其所有子套件中的 @Controller, @Service, @Repository 等註解。
+         或者，你可以分別列出每個需要掃描的套件，例如：
+         <context:component-scan base-package="com.example.controller"/>
+         <context:component-scan base-package="com.example.service"/>
+         <context:component-scan base-package="com.example.repository"/>
+         這裡我使用一個更廣泛的根套件，通常是推薦的做法。
+    -->
+    <context:component-scan base-package="com.example"/>
+
+    <!-- 配置視圖解析器： -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 配置靜態資源處理： -->
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+</beans>

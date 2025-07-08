@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+        body { 
+        	font-family: Arial; 
+        	background: #f2f4f8; 
+        }
+        
+
+        
+        h2 { 
+        	text-align: center; color: #333; 
+        }
+        	
+        .form-group { 
+        	margin: 10px 0; 
+        }
+        
+        label { 
+        	font-weight: bold; margin-right: 10px; 
+        }
+        
+        input, select { 
+        	padding: 5px; border-radius: 4px; width: 200px; 
+        }
+        
+        table { 
+       		 width: 100%; margin-top: 20px; border-collapse: collapse;
+         }
+         
+        th, td { 
+        	border: 1px solid #ccc; padding: 8px; text-align: center; 
+        }
+        
+        th { 
+        	background-color: #eee; 
+        }
+        
+        button { 
+        	margin-top: 20px; padding: 10px 20px; 
+        }

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增商品用料</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --white-color: #fff;
+            --border-color: #dee2e6;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --border-radius: 0.25rem;
+            --spacing-unit: 1rem;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column; /* Changed to column as sidebar is removed */
+            min-height: 100vh;
+        }
+
+        /* Removed #sidebar-container styles */
+
+        .content {
+            flex-grow: 1;
+            padding: calc(2 * var(--spacing-unit));
+            width: 100%; /* Ensure content takes full width */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--white-color);
+            padding: calc(1.5 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .btn-secondary,
+        .btn-primary {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            font-size: 0.9rem;
+            margin-right: 0.5rem; /* Added margin for buttons */
+            margin-bottom: var(--spacing-unit); /* For consistency */
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+            gap: 1rem; /* Spacing between input elements */
+            margin-bottom: calc(1.5 * var(--spacing-unit));
+            align-items: center;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            flex-basis: 80px; /* Give labels a fixed width */
+            text-align: right; /* Align label text to the right */
+            padding-right: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .input-group input[type="text"] {
+            flex: 1 1 200px; /* Allows inputs to grow and shrink, with a base width */
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            box-sizing: border-box;
+            min-width: 150px; /* Minimum width for inputs */
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: calc(2 * var(--spacing-unit)) 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--spacing-unit);
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            font-weight: bold;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Basic responsive adjustments */
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .input-group label {
+                text-align: left;
+                padding-right: 0;
+                width: 100%; /* Labels take full width on small screens */
+            }
+
+            .input-group input[type="text"] {
+                width: 100%;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="header-container"></div>
+        <main class="content">
+            <div class="container">
+                <h2>新增商品用料</h2>
+                <div>
+                    <a href="bomQuery.html" class="btn-secondary">回查詢頁</a>
+                </div>
+                <div class="input-group">
+                    <label for="product_id">商品ID: </label><input type="text" id="product_id">
+                    <label for="material_id">物料ID: </label><input type="text" id="material_id">
+                    <label for="quantity">單位數量: </label><input type="text" id="quantity">
+                </div>
+                <div>
+                    <button class="btn-primary" id="append">新增到列表</button>
+                    <button class="btn-primary" id="submit">送出表單存入資料庫</button>
+                </div>
+                <hr>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>商品ID</th>
+                            <th>物料ID</th>
+                            <th>單位數量</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+    
+            // Removed sidebar loading logic
+            // $("#sidebar-container").load("../../common/sidebar.html", function () {
+            //     $.getScript("../../js/sidebar.js");
+            // });
+
+            $('#append').click(function () {
+                function isValidPositiveNumber(value) {
+                    const numberRegex = /^\d+(\.\d+)?$/;
+                    return numberRegex.test(value) && Number(value) > 0;
+                }
+
+                let productId = $('#product_id').val();
+                let materialId = $('#material_id').val();
+                let quantityPerUnit = $('#quantity').val();
+
+                if (!productId || !materialId || !quantityPerUnit) {
+                    alert("所有欄位都必須填寫！");
+                    return;
+                }
+
+                if (
+                    !isValidPositiveNumber(productId) ||
+                    !isValidPositiveNumber(materialId) ||
+                    !isValidPositiveNumber(quantityPerUnit)
+                ) {
+                    alert("請輸入有效的正數，不能包含字母或符號！");
+                    return;
+                }
+
+                let content = `<tr>
+                    <td>${productId}</td>
+                    <td>${materialId}</td>
+                    <td>${quantityPerUnit}</td>
+                </tr>`;
+                $('#data-body').append(content);
+
+                $('#material_id').val('');
+                $('#quantity').val('');
+            });
+
+            $('#submit').click(function () {
+                const confirmInsert = confirm("確定要送出新增嗎?");
+                if (!confirmInsert) return;
+
+                if ($('#data-body tr').length === 0) {
+                    alert("目前沒有任何資料，請先新增至少一筆！");
+                    return;
+                }
+
+                let result = [];
+                let hasError = false;
+
+                $('#data-body tr').each(function () {
+                    let productId = $(this).find('td').eq(0).text().trim();
+                    let materialId = $(this).find('td').eq(1).text().trim();
+                    let quantityPerUnit = $(this).find('td').eq(2).text().trim();
+
+                    if (!productId || !materialId || !quantityPerUnit) {
+                        alert("列表中有欄位為空白，請確認後再送出！");
+                        hasError = true;
+                        return false; // Break out of each loop
+                    }
+                    result.push({ productId, materialId, quantityPerUnit });
+                });
+
+                if (hasError) {
+                    return;
+                }
+
+                if (result.length === 0) {
+                    return; // Should not happen if hasError is false and table is not empty
+                }
+
+                $.post({
+                    url: '../../BOMSaveServlet',
+                    data: JSON.stringify(result),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        alert("新增成功！");
+                        console.log("伺服器回應", response);
+                        window.location.href = "bomQuery.html";
+                    },
+                    error: function (xhr) {
+                        alert("新增失敗: " + xhr.responseText);
+                        console.error("錯誤詳情:", xhr.status, xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

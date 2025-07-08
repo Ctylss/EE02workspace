@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+/* 標題 */
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* 表單容器 */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* 表單欄位 */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 一般按鈕 */
+button {
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0b7dda;
+}
+/* 表格格線設定 */
+table {
+    width: 100%;
+    border-collapse: collapse; /* ✅ 合併格線，否則會雙線 */
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid #ccc;   /* ✅ 顯示格線 */
+    padding: 10px;
+    text-align: center;
+    word-break: break-word;
+}
+
+/* 表格容器 */
+.table-container {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+/* 操作按鈕區塊的按鈕間距 */
+td .button {
+    margin: 0 5px;
+}
+
+/* 下架按鈕 */
+.btn-danger {
+    background-color: #f44336;
+    color: #fff;
+    padding: 6px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+}
+
+
+.btn-danger:hover {
+    background-color: #d32f2f;
+}
+
+/* 修改按鈕 */
+.btn-edit {
+    background-color: #2196F3;
+    color: #fff;
+    padding: 6px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.btn-edit:hover {
+    background-color: #0b7dda;
+}
+
+/* 新增按鈕容器間距往下 */
+.add-btn-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* 新增按鈕樣式 */
+.btn-add {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-add:hover {
+    background-color: #388E3C;
+}

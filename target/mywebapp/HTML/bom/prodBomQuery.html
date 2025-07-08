@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品物料結構</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --white-color: #fff;
+            --border-color: #dee2e6;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --border-radius: 0.25rem;
+            --spacing-unit: 1rem;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .wrapper {
+            display: flex; /* Kept flexbox for potential future use or if header/footer are added */
+            min-height: 100vh;
+            flex-direction: column; /* Changed to column as sidebar is removed */
+        }
+
+        /* #sidebar-container is removed, so its styles are no longer needed */
+
+        .content {
+            flex-grow: 1;
+            padding: calc(2 * var(--spacing-unit));
+            width: 100%; /* Ensure content takes full width */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--white-color);
+            padding: calc(1.5 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .btn-secondary, .btn-primary {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            margin-bottom: var(--spacing-unit);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .form-group {
+            display: flex;
+            gap: var(--spacing-unit);
+            margin-bottom: calc(1.5 * var(--spacing-unit));
+            align-items: center;
+        }
+
+        .form-group input[type="text"] {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            box-sizing: border-box; /* Ensures padding doesn't add to the width */
+        }
+
+        .form-group input[type="text"]::placeholder {
+            color: #6c757d;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--spacing-unit);
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            font-weight: bold;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #e9ecef;
+            cursor: pointer;
+        }
+
+        #productNameDisplay {
+            font-weight: bold;
+            color: var(--dark-color);
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .wrapper {
+                flex-direction: column;
+            }
+
+            .form-group {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .form-group button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="header-container"></div>
+        <main class="content">
+            <div class="container">
+                <h2>商品物料結構</h2>
+                <div>
+                    <a href="bomQuery.html" class="btn-secondary">回查詢頁</a>
+                </div>
+                <form class="form-group" id="searchForm">
+                    <input type="text" id="keywordInput" placeholder="輸入關鍵字">
+                    <button type="submit" class="btn-primary">查詢</button>
+                </form> 
+
+                <div>
+                    <h3>商品名稱: <span id="productNameDisplay"></span></h3>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>物料ID</th>
+                            <th>物料名稱</th>
+                            <th>單位用量</th>
+                        </tr>
+                    </thead>
+                    <tbody id="materialTableBody">
+
+                    </tbody>
+                </table>
+        </main>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Load header (sidebar related lines are removed)
+           
+            // Removed: $("#sidebar-container").load("../../common/sidebar.html", function () {
+            // Removed: $.getScript("../../js/sidebar.js");
+            // Removed: });
+
+            // Get product details from URL parameters
+            const params = new URLSearchParams(window.location.search);
+            const productName = params.get("productName");
+            $("#productNameDisplay").text(productName);
+
+            const productId = params.get("productId");
+
+            // Fetch material data based on productId
+            $.ajax({
+                url: "../../ProdBOMQueryServlet",
+                method: "GET",
+                data: { productId: productId },
+                dataType: "json",
+                success: function (data) {
+                    const tbody = $("#materialTableBody");
+                    tbody.empty();
+                    if (data.length === 0) {
+                        tbody.append("<tr><td colspan='3'>查無物料資料</td></tr>");
+                    } else {
+                        data.forEach(function (bom) {
+                            tbody.append(`
+                                <tr>
+                                    <td>${bom.materialId}</td>
+                                    <td>${bom.materialName}</td>
+                                    <td>${bom.quantityPerUnit}</td>
+                                </tr>
+                                `);
+                        });
+                    }
+                },
+               
+            });
+
+            // Handle search form submission
+            $("#searchForm").submit(function (e) {
+                e.preventDefault();
+                const keyword = $("#keywordInput").val();
+                const url = "bomQuery.html?keyword=" + encodeURIComponent(keyword || "");
+                location.href = url;
+            })
+        });
+    </script>
+</body>
+
+</html>
