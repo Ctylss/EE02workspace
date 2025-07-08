@@ -1,85 +1,55 @@
 package com.mes.bean;
 
 import java.math.BigDecimal;
-import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
+@Entity @Table(name = "Material")
 public class Material {
+
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="material_id")
 	private int materialId;
+
+	@Column(name ="material_name")
 	private String materialName;
+
+	@Column(name ="unit")
 	private String unit;
+
+	@Column(name="material_description")
 	private String materialDescription;
+
+	@Column(name="location")
 	private String location;
+
+	@Column(name="stock_current")
 	private BigDecimal stockCurrent;
+
+	@Column(name="stock_reserved")
 	private BigDecimal stockReserved;
+
+	@Column(name="stock_in_shipping")
 	private BigDecimal stockInShipping;
+
+	@Column(name="safety_stock")
 	private int safetyStock;
+
+	@Column(name="reorder_level")
 	private int reorderLevel;
+
+	@Column(name="active")
 	private boolean active;
-	public int getMaterialId() {
-		return materialId;
-	}
-	public void setMaterialId(int materialId) {
-		this.materialId = materialId;
-	}
-	public String getMaterialName() {
-		return materialName;
-	}
-	public void setMaterialName(String materialName) {
-		this.materialName = materialName;
-	}
-	public String getUnit() {
-		return unit;
-	}
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-	public String getMaterialDescription() {
-		return materialDescription;
-	}
-	public void setMaterialDescription(String materialDescription) {
-		this.materialDescription = materialDescription;
-	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	public BigDecimal getStockCurrent() {
-		return stockCurrent;
-	}
-	public void setStockCurrent(BigDecimal stockCurrent) {
-		this.stockCurrent = stockCurrent;
-	}
-	public BigDecimal getStockReserved() {
-		return stockReserved;
-	}
-	public void setStockReserved(BigDecimal stockReserved) {
-		this.stockReserved = stockReserved;
-	}
-	public BigDecimal getStockInShipping() {
-		return stockInShipping;
-	}
-	public void setStockInShipping(BigDecimal stockInShipping) {
-		this.stockInShipping = stockInShipping;
-	}
-	public int getSafetyStock() {
-		return safetyStock;
-	}
-	public void setSafetyStock(int safetyStock) {
-		this.safetyStock = safetyStock;
-	}
-	public int getReorderLevel() {
-		return reorderLevel;
-	}
-	public void setReorderLevel(int reorderLevel) {
-		this.reorderLevel = reorderLevel;
-	}
-	public boolean isActive() {
-		return active;
-	}
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-	
+
 }

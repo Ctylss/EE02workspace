@@ -1,54 +1,40 @@
 package com.mes.bean;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity @Table(name = "Supplier")
 public class Supplier {
+
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "supplier_id")
 	private int supplierId;
+
+	@Column(name = "supplier_name")
 	private String supplierName;
+
+	@Column(name = "pm")
 	private String pm;
+
+	@Column(name = "supplier_phone")
 	private String supplierPhone;
+
+	@Column(name = "supplier_email")
 	private String supplierEmail;
+
+	@Column(name = "supplier_address")
 	private String supplierAddress;
-	private int active;
-	public int getSupplierId() {
-		return supplierId;
-	}
-	public void setSupplierId(int supplierId) {
-		this.supplierId = supplierId;
-	}
-	public String getSupplierName() {
-		return supplierName;
-	}
-	public void setSupplierName(String supplierName) {
-		this.supplierName = supplierName;
-	}
-	public String getPm() {
-		return pm;
-	}
-	public void setPm(String pm) {
-		this.pm = pm;
-	}
-	public String getSupplierPhone() {
-		return supplierPhone;
-	}
-	public void setSupplierPhone(String supplierPhone) {
-		this.supplierPhone = supplierPhone;
-	}
-	public String getSupplierEmail() {
-		return supplierEmail;
-	}
-	public void setSupplierEmail(String supplierEmail) {
-		this.supplierEmail = supplierEmail;
-	}
-	public String getSupplierAddress() {
-		return supplierAddress;
-	}
-	public void setSupplierAddress(String supplierAddress) {
-		this.supplierAddress = supplierAddress;
-	}
-	public int getActive() {
-		return active;
-	}
-	public void setActive(int active) {
-		this.active = active;
-	}
+
+	@Column(name = "active")
+	private boolean active;
 	
 }

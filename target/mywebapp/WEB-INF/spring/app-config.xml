@@ -20,7 +20,7 @@
 
     <!-- 配置視圖解析器： -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="prefix" value="/JSP/yw/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
@@ -43,8 +43,8 @@
         <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
         <!-- IMPORTANT: Update your actual database name, username, and password -->
         <property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=jdbcDB;encrypt=true;trustServerCertificate=true"/>
-        <property name="username" value="your_username"/>
-        <property name="password" value="your_password"/>
+        <property name="username" value="testuser"/>
+        <property name="password" value="password"/>
     </bean>
 
     <!-- 配置 JPA 實體管理器工廠 (EntityManagerFactory)： -->

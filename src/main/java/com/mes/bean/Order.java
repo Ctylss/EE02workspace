@@ -2,57 +2,48 @@ package com.mes.bean;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity @Table(name = "PurchaseOrder")
+
 public class Order {
+
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name ="order_id")
 	private int orderId;
-	private int supplierId;
+
+	@ManyToOne
+	@JoinColumn(name = "supplier_id")
+	private Supplier supplier;
+
+	@Column(name ="order_date")
 	private String orderDate;
+
+	@Column(name ="order_status")
 	private String orderStatus;
+
+	@Column(name ="sub_total")
 	private double subTotal;
+
+	@Transient 
 	private String supplierName;
-	private List<OrderItem>itemList;
 	
-	public int getOrderId() {
-		return orderId;
-	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
-	}
-	public int getSupplierId() {
-		return supplierId;
-	}
-	public void setSupplierId(int supplierId) {
-		this.supplierId = supplierId;
-	}
-	public String getOrderDate() {
-		return orderDate;
-	}
-	public void setOrderDate(String orderDate) {
-		this.orderDate = orderDate;
-	}
-	public String getOrderStatus() {
-		return orderStatus;
-	}
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
-	}
-	public double getSubTotal() {
-		return subTotal;
-	}
-	public void setSubTotal(double subTotal) {
-		this.subTotal = subTotal;
-	}
-	public String getSupplierName() {
-	    return supplierName;
-	}
+	@Transient 
+	private List<OrderItem>itemList;
 
-	public void setSupplierName(String supplierName) {
-	    this.supplierName = supplierName;
-	}
-	public List<OrderItem> getItemList() {
-	    return itemList;
-	}
-
-	public void setItemList(List<OrderItem> itemList) {
-	    this.itemList = itemList;
-	}
+	
 }
