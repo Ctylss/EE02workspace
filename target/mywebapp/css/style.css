@@ -1,0 +1,499 @@
+/* General Body and Layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+    color: #333;
+    display: flex; /* 使用 Flexbox 布局整個應用 */
+    min-height: 100vh; /* 確保內容至少佔據視口高度 */
+    overflow-x: hidden; /* 防止水平滾動 */
+}
+
+.app-wrapper {
+    display: flex;
+    flex-grow: 1; /* 讓 app-wrapper 填充可用空間 */
+}
+
+/* Main Sidebar */
+.main-sidebar {
+    width: 250px; /* 固定側邊欄寬度 */
+    background-color: #2c3b4a;
+    color: #fff;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* 防止側邊欄收縮 */
+    transition: width 0.3s ease; /* 為寬度變化添加過渡效果 */
+    z-index: 1000; /* 確保側邊欄在頂層 */
+}
+
+/* 當 body 有 sidebar-closed 時，側邊欄收起 */
+body.sidebar-closed .main-sidebar {
+    width: 60px; /* 收起後的寬度 */
+    overflow: hidden; /* 隱藏溢出內容 */
+}
+
+/* Header, Main Content, Footer Wrapper */
+.main-right-content-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 250px; /* 為展開的側邊欄騰出空間 */
+    transition: margin-left 0.3s ease; /* 為 margin-left 變化添加過渡效果 */
+}
+
+/* 當 body 有 sidebar-closed 時，主內容區左邊距調整 */
+body.sidebar-closed .main-right-content-wrapper {
+    margin-left: 60px; /* 側邊欄收起後調整左邊距 */
+}
+
+
+/* Sidebar Brand/Logo */
+.sidebar-brand {
+    padding: 15px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.sidebar-brand .brand-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 居中對齊 */
+    white-space: nowrap; /* 防止換行 */
+}
+
+.sidebar-brand .brand-link i {
+    margin-right: 10px;
+}
+
+/* 在側邊欄收起時隱藏文本 */
+body.sidebar-closed .sidebar-brand .brand-link span {
+    display: none;
+}
+
+body.sidebar-closed .sidebar-brand .brand-link i {
+    margin-right: 0; /* 圖標不顯示文本時移除右邊距 */
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    flex-grow: 1; /* 讓導航菜單填充剩餘空間 */
+    padding: 0 15px;
+}
+
+.sidebar-menu {
+    list-style: none; /* 移除默認的列表點 */
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu .menu-item {
+    margin-bottom: 5px;
+}
+
+.sidebar-menu .menu-link {
+    display: flex;
+    align-items: center;
+    color: #b8c7ce;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* 防止菜單項文本換行 */
+    overflow: hidden; /* 隱藏溢出文本 */
+    text-overflow: ellipsis; /* 顯示省略號 */
+}
+
+.sidebar-menu .menu-link:hover,
+.sidebar-menu .menu-link.active { /* 保持活躍狀態的高亮 */
+    background-color: #1a2229;
+    color: #fff;
+}
+
+.sidebar-menu .menu-link i {
+    margin-right: 10px;
+    width: 20px; /* 固定圖標寬度以保持對齊 */
+    text-align: center;
+    flex-shrink: 0; /* 防止圖標收縮 */
+}
+
+/* 為父級標題鏈接添加樣式 (例如 "人員與帳號") */
+.sidebar-menu .static-parent-link {
+    font-weight: bold; /* 讓父級標題更突出 */
+    color: #fff; /* 讓父級標題顏色更亮 */
+    background-color: #2c3b4a; /* 與側邊欄背景一致 */
+    cursor: default; /* 更改鼠標樣式，表示不可點擊展開 */
+    padding-bottom: 5px; /* 與下方子菜單間距 */
+    /* 移除 border-bottom: 1px solid rgba(255, 255, 255, 0.05); 以達到更簡潔的視覺效果 */
+    margin-bottom: 5px; /* 分隔線下方間距 */
+}
+
+.sidebar-menu .static-parent-link:hover {
+    background-color: #2c3b4a; /* 懸停時保持背景色不變 */
+    color: #fff; /* 懸停時保持文本顏色不變 */
+}
+
+
+/* 在側邊欄收起時隱藏菜單文本和箭頭 */
+body.sidebar-closed .sidebar-menu .menu-link span {
+    display: none;
+}
+/* 確保箭頭圖標在所有情況下都不顯示 */
+.submenu-icon {
+    display: none !important;
+}
+
+
+/* Submenu (Static Display) - 第一層子菜單 (例如 "員工管理") */
+.submenu-static {
+    list-style: none; /* 再次確保移除列表點 */
+    padding: 0;
+    margin: 0;
+    background-color: #3b4d5e; /* 子菜單背景色 */
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 10px; /* 與下一個主菜單項的間距 */
+    border-radius: 4px;
+}
+
+.submenu-static li a {
+    display: flex; /* 使用 flexbox 方便對齊 */
+    align-items: center; /* 垂直居中對齊 */
+    padding: 8px 15px 8px 45px; /* **增加左側內邊距，提供更多縮進** */
+    color: #e0e6ea;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative; /* 用於定位圓點 */
+}
+
+/* 為第一層子菜單添加圓點 */
+.submenu-static li a::before {
+    content: '\2022'; /* Unicode 圓點字符 */
+    position: absolute;
+    left: 28px; /* 調整圓點位置，使其與文字有合適距離 */
+    font-size: 0.8em; /* 圓點大小 */
+    color: #92a4b3; /* 圓點顏色，可以調整 */
+    line-height: 1; /* 確保圓點垂直居中 */
+}
+
+.submenu-static li a:hover,
+.submenu-static li a.active {
+    background-color: #2a3542;
+    color: #fff;
+}
+
+/* 嵌套的子菜單 (第二層及以後，例如 "機台查詢 (前台頁面)") */
+.submenu-static.nested {
+    background-color: #4f6377; /* 更深一點的顏色，增加層次感 */
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border-left: 3px solid rgba(255, 255, 255, 0.2); /* 左側邊框強調層次 */
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.submenu-static.nested li a {
+    display: flex; /* 確保 flexbox 應用於嵌套子菜單 */
+    align-items: center; /* 垂直居中對齊 */
+    padding-left: 70px; /* **更深的縮進** */
+    color: #f0f5f8; /* 調整文字顏色，確保可讀性 */
+    font-size: 0.95em; /* 稍微縮小字體 */
+    position: relative; /* 用於定位圓點 */
+}
+
+/* 為嵌套子菜單添加圓點 */
+.submenu-static.nested li a::before {
+    content: '\2022'; /* Unicode 圓點字符 */
+    position: absolute;
+    left: 53px; /* 調整圓點位置 */
+    font-size: 0.8em;
+    color: #aebfd0; /* 圓點顏色 */
+    line-height: 1;
+}
+
+.submenu-static.nested li a:hover,
+.submenu-static.nested li a.active {
+    background-color: #3d5063; /* 懸停和活躍狀態的背景色 */
+    color: #fff;
+}
+
+/* 如果有更深層次的嵌套，可以繼續添加類似的規則 */
+/* 例如 .submenu-static.nested .submenu-static.nested { ... } */
+/* 並且 .submenu-static.nested .submenu-static.nested li a { padding-left: 95px; } */
+
+
+/* Main Header */
+.main-header {
+    background-color: #fff;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 60px;
+    z-index: 999; /* 確保 Header 在 Footer 之上 */
+}
+
+.header-content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between; /* 元素之間分散對齊 */
+}
+
+.main-header .logo {
+    display: none; /* 在桌面模式下，Header 中的 Logo 通常是隱藏的，因為側邊欄已有 */
+}
+
+.main-header .logo-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.main-header .logo-link i {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+.top-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.top-nav-list li {
+    margin-left: 20px;
+}
+
+.top-nav-list a {
+    color: #555;
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.top-nav-list a:hover {
+    color: #007bff;
+}
+
+.top-nav-list .user-info span {
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+/* Sidebar Toggle Button (桌面模式下隱藏) */
+.sidebar-toggle-btn {
+    display: none; /* 在桌面模式下隱藏 */
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #555;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.sidebar-toggle-btn:hover {
+    color: #007bff;
+}
+
+/* Actual Page Content Wrapper */
+.actual-page-content {
+    padding: 20px;
+    flex-grow: 1; /* 讓內容區域填充可用空間 */
+}
+
+/* Main Content Area */
+.main-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    min-height: calc(100vh - 60px - 70px - 40px); /* 視口高度 - header - footer - padding */
+}
+
+/* Content Header */
+.content-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.content-header h1 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 28px;
+}
+
+.content-header p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.content-header .user-role {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #007bff;
+}
+
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 自適應列數 */
+    gap: 25px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden; /* 防止內容溢出 */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+    font-size: 40px;
+    color: #007bff;
+    margin-right: 20px;
+    width: 60px; /* 固定圖標區域寬度 */
+    text-align: center;
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+    color: #333;
+}
+
+.card-value {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.card-link:hover {
+    color: #0056b3;
+}
+
+.card-link i {
+    margin-left: 8px;
+    font-size: 0.9em;
+}
+
+/* Specific Card Styles */
+.card.production-orders .card-icon { color: #28a745; }
+.card.purchase-orders .card-icon { color: #ffc107; }
+.card.equipment-alerts .card-icon { color: #dc3545; }
+.card.production-progress .card-icon { color: #6f42c1; }
+.card.inventory-warning .card-icon { color: #fd7e14; }
+
+/* Progress Bar */
+.progress-bar-container {
+    background-color: #e9ecef;
+    border-radius: 5px;
+    height: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+/* Main Footer */
+.main-footer {
+    background-color: #fff;
+    color: #777;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #e7e7e7;
+    margin-top: auto; /* 將 footer 推到底部 */
+    flex-shrink: 0; /* 防止 footer 收縮 */
+}
+
+/* Utility classes for screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+/* style.css 裡新增這些 */
+.status-badge {
+    display: inline-block;
+    padding: 0.25em 0.6em;
+    font-size: 0.85em;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    color: #fff;
+}
+.status-Scheduled { background-color: #3498db; }
+.status-InProduction { background-color: #f39c12; }
+.status-Completed { background-color: #2ecc71; }
+.status-Delayed { background-color: #e74c3c; }
+.status-Cancelled { background-color: #95a5a6; }
+
+.modal-overlay.open {
+    display: flex !important;
+    animation: fadeIn 0.3s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.btn-icon i {
+    margin: 0;
+    font-size: 1em;
+}
+

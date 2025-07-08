@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>編輯 BOM</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --white-color: #fff;
+            --border-color: #dee2e6;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --border-radius: 0.25rem;
+            --spacing-unit: 1rem;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column; /* Changed to column as sidebar is removed */
+            min-height: 100vh;
+        }
+
+        /* Removed #sidebar-container styles */
+
+        .content {
+            flex-grow: 1;
+            padding: calc(2 * var(--spacing-unit));
+            width: 100%; /* Ensure content takes full width */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--white-color);
+            padding: calc(1.5 * var(--spacing-unit));
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        h2 span {
+            color: var(--dark-color);
+        }
+
+        .btn-secondary,
+        .btn-primary {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--spacing-unit);
+            margin-bottom: calc(2 * var(--spacing-unit)); /* Add space below table */
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            font-weight: bold;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .data-table input[type="text"] {
+            width: calc(100% - 16px); /* Adjust for padding and border */
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            box-sizing: border-box; /* Include padding in the width */
+            font-size: 0.95rem;
+        }
+
+        /* Basic responsive adjustments */
+        @media (max-width: 768px) {
+            .data-table th, .data-table td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .data-table input[type="text"] {
+                padding: 0.4rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="header-container"></div>
+        <main class="content">
+            <div class="container">
+                <h2>編輯商品用料 商品ID:<span id="productIdDisplay"></span></h2>
+                <div>
+                    <a href="bomQuery.html" class="btn-secondary">回查詢頁</a>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>bom表ID</th>
+                            <th>物料ID</th>
+                            <th>單位用量</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bomEditTable"></tbody>
+                </table>
+
+                <div>
+                    <button class="btn-primary" id="submit">送出更新</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+        
+            // Removed sidebar loading logic
+            // $("#sidebar-container").load("../../common/sidebar.html", function () {
+            //     $.getScript("../../js/sidebar.js");
+            // });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get("productId");
+            $("#productIdDisplay").text(productId);
+
+            if (productId) {
+                $.ajax({
+                    url: "../../BOMByProductIdServlet",
+                    method: "GET",
+                    data: { productId: productId },
+                    dataType: "json",
+                    success: function (data) {
+                        const tbody = $("#bomEditTable");
+                        tbody.empty(); // Clear existing content
+                        if (data.length === 0) {
+                            tbody.append("<tr><td colspan='3'>查無可編輯的物料資料</td></tr>");
+                        } else {
+                            data.forEach(bom => {
+                                tbody.append(`
+                                    <tr>
+                                        <td>${bom.bomId}</td>
+                                        <td><input type="text" name="materialId" value="${bom.materialId}"></td>
+                                        <td><input type="text" name="quantityPerUnit" value="${bom.quantityPerUnit}"></td>
+                                    </tr>
+                                `);
+                            });
+                        }
+                    },
+                    error: function (xhr) {
+                        alert("查詢 BOM 失敗: " + xhr.status + " - " + xhr.responseText);
+                        console.error("錯誤詳情:", xhr.status, xhr.responseText);
+                    }
+                });
+            } else {
+                alert("缺少 productId，無法查詢資料");
+            }
+
+            $("#submit").click(function () {
+                const confirmUpdate = confirm("確定要送出更新嗎?");
+                if (!confirmUpdate) return;
+
+                let result = [];
+                let isValid = true;
+
+                function isValidPositiveNumber(value) {
+                    const numberRegex = /^\d+(\.\d+)?$/;
+                    return numberRegex.test(value) && Number(value) > 0;
+                }
+
+                $('#bomEditTable tr').each(function (index, element) {
+                    // Skip if it's the "No data" row
+                    if ($(this).find('td').attr('colspan') === '3') {
+                        return true; // continue to next iteration
+                    }
+
+                    let bomId = $(this).find('td').eq(0).text();
+                    let materialId = $(this).find('td').eq(1).find('input').val();
+                    let quantityPerUnit = $(this).find('td').eq(2).find('input').val();
+
+                    if (!materialId || !quantityPerUnit) {
+                        alert(`第 ${index + 1} 筆資料有空白欄位，請填寫完整！`);
+                        isValid = false;
+                        return false; // break each
+                    }
+
+                    if (!isValidPositiveNumber(materialId) || !isValidPositiveNumber(quantityPerUnit)) {
+                        alert(`第 ${index + 1} 筆資料格式錯誤：只能輸入正數，不能有字母或符號`);
+                        isValid = false;
+                        return false; // break each
+                    }
+
+                    result.push({ bomId, materialId, quantityPerUnit });
+                });
+
+                if (!isValid) {
+                    alert("更新失敗: 請確認輸入欄位");
+                    return;
+                }
+
+                // If no data to update (e.g., table was empty from start)
+                if (result.length === 0) {
+                    alert("沒有可更新的資料。");
+                    return;
+                }
+
+                $.post({
+                    url: '../../BOMUpdateServlet',
+                    data: JSON.stringify(result),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        alert("更新成功！");
+                        console.log("伺服器回應", response);
+                        window.location.href = "bomQuery.html";
+                    },
+                    error: function (xhr) {
+                        alert("伺服器錯誤：更新失敗！" + xhr.responseText);
+                        console.error("錯誤詳情:", xhr.status, xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

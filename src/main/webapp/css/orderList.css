@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+/* 統一字體與背景 */
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+   
+    background-color: #f8f9fa;
+}
+
+/* 標題 */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+/* 工具列搜尋區 */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    width: 200px;
+}
+
+/* 表格主要樣式 */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.data-table th {
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+
+.data-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* 子表格（明細區） */
+.sub-table {
+    width: 100%;
+    background-color: #fdfdfd;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+.sub-table th {
+    background-color: #f0f0f0;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.sub-table td, .sub-table th {
+    padding: 10px;
+    text-align: center;
+}
+
+/* 操作 icon 按鈕 */
+.btn-icon {
+    border: none;
+    background: none;
+    font-size: 1.1rem;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+body.order-list-body {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+/* 0627保證操作欄和子表格出貨狀態置中對齊 */
+.data-table td:last-child,
+.data-table th:last-child,
+.sub-table td:last-child,
+.sub-table th:last-child {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* 0627保證所有 icon 垂直置中 */
+.btn-icon i {
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.edit-icon { color: var(--primary-color); }
+.edit-icon:hover { color: var(--primary-hover-color); }
+
+.delete-icon { color: var(--danger-color); }
+.delete-icon:hover { color: var(--danger-hover-color); }
+
+.view-icon { color: var(--info-color); }
+.view-icon:hover { color: var(--info-hover-color); }
