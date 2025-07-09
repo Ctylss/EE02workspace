@@ -14,10 +14,10 @@ import com.machine.Service.machine.MachinesService;
 public class GoUpdateMachineServlet extends HttpServlet {
     private MachinesService machinesService = new MachinesService();
     private static final long serialVersionUID = 1L;
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         try {
             int machineId = Integer.parseInt(request.getParameter("machineId"));
             MachinesBean machine = machinesService.findMachineById(machineId);
@@ -27,10 +27,10 @@ public class GoUpdateMachineServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/backstage");
                 return;
             }
-            
+
             System.out.println("machineId=" + request.getParameter("machineId"));
             request.setAttribute("machine", machine);
-            request.getRequestDispatcher("/JSP/machine/updateMachine.jsp").forward(request, response);
+            request.getRequestDispatcher("/JSP/cy/machine/updateMachine.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

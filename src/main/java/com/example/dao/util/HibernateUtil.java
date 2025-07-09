@@ -40,7 +40,7 @@ public class HibernateUtil {
             metadataSources.addAnnotatedClass(Product.class); // 保持不变
             metadataSources.addAnnotatedClass(Supplier.class); // **新增：添加 Supplier 实体**
             metadataSources.addAnnotatedClass(Material.class); // **新增：添加 Material 实体**
-
+           
             Metadata metadata = metadataSources.getMetadataBuilder().build();
 
             sessionFactory = metadata.getSessionFactoryBuilder().build();
@@ -88,5 +88,10 @@ public class HibernateUtil {
             throw new IllegalStateException("Hibernate SessionFactory is not initialized.");
         }
         return sessionFactory.openSession();
+    }
+
+    public static void closeSessionFactory() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'closeSessionFactory'");
     }
 }

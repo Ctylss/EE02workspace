@@ -21,7 +21,7 @@ public class InsertMachineServlet extends HttpServlet {
         String location = request.getParameter("machineLocation");
 
         // 預設 forward 頁面是原表單頁面
-        String view = "/JSP/machine/insertMachine.jsp";
+        String view = "/JSP/cy/machine/insertMachine.jsp";
 
         try {
             MachinesBean machine = new MachinesBean(name, serial, status, location);

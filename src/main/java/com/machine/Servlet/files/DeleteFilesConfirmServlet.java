@@ -32,7 +32,7 @@ public class DeleteFilesConfirmServlet extends HttpServlet {
                 return;
             }
             request.setAttribute("file", file);
-            request.getRequestDispatcher("/JSP/files/fileDeleteConfirm.jsp").forward(request, response);
+            request.getRequestDispatcher("/JSP/cy/files/fileDeleteConfirm.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/FileManagementServlet?error=" + 
                 java.net.URLEncoder.encode("檔案ID格式錯誤", "UTF-8"));

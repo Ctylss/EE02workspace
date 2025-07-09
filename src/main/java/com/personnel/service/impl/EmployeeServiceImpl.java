@@ -1,9 +1,9 @@
-package com.personal.service.impl; // 確保 package 名稱和路徑一致
+package com.personnel.service.impl;
 
-import com.personal.dao.EmployeeDao;
-import com.personal.dao.impl.EmployeeDaoImpl;
-import com.personal.model.Employee;
-import com.personal.service.EmployeeService;
+import com.personnel.dao.EmployeeDao;
+import com.personnel.dao.impl.EmployeeDaoImpl;
+import com.personnel.model.Employee;
+import com.personnel.service.EmployeeService;
 
 import java.sql.SQLException;
 import java.util.Collections;
@@ -11,13 +11,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EmployeeServiceImpl implements EmployeeService { // 確保類別名稱是 EmployeeServiceImpl 且正確 implements EmployeeService
+import org.hibernate.Session;
+
+public class EmployeeServiceImpl implements EmployeeService {
 
     private static final Logger LOGGER = Logger.getLogger(EmployeeServiceImpl.class.getName());
     private EmployeeDao employeeDao;
 
-    public EmployeeServiceImpl() {
-        this.employeeDao = (EmployeeDao) new EmployeeDaoImpl(); // 確保使用正確的實作類別
+    public EmployeeServiceImpl(Session session) {
+        this.employeeDao = new EmployeeDaoImpl(session);
     }
 
     @Override

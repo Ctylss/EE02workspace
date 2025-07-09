@@ -40,7 +40,7 @@ public class InsertRepairServlet extends HttpServlet {
 		MachineRepairBean repair = new MachineRepairBean(machineId, repairDescription, now, repairStatus, employeeId);
 		try {
 			machineRepairService.insertRepair(repair);
-			request.getRequestDispatcher("/JSP/repair/repairSuccess.jsp").forward(request, response);
+			request.getRequestDispatcher("/JSP/cy/repair/repairSuccess.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "資料插入失敗：" + e.getMessage());

@@ -1,4 +1,4 @@
-package com.personal.servlet;
+package com.personnel.servlet;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;

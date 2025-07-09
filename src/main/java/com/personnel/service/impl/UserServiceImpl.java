@@ -1,9 +1,9 @@
-package com.personal.service.impl;
+package com.personnel.service.impl;
 
-import com.personal.dao.UserDAO;
-import com.personal.dao.impl.UserDAOImpl;
-import com.personal.model.User;
-import com.personal.service.UserService;
+import com.personnel.dao.UserDAO;
+import com.personnel.dao.impl.UserDAOImpl;
+import com.personnel.model.User;
+import com.personnel.service.UserService;
 
 import java.sql.SQLException;
 import java.util.Collections;
@@ -11,14 +11,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.hibernate.Session;
+
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
     private UserDAO userDAO;
 
-    public UserServiceImpl() {
-        this.userDAO = new UserDAOImpl();
+    public UserServiceImpl(Session session) {
+        this.userDAO = new UserDAOImpl(session);
     }
+ // 建構子：建立這個 Service 的時候，傳進一個 Hibernate 的 Session，
+ // 用來初始化 DAO（後面會呼叫 DAO 去做資料庫操作）
 
     @Override
     public User loginUser(String username, String password) {

@@ -21,5 +21,11 @@
         <mapping class="com.mes.bean.Order"/>
         <mapping class="com.mes.bean.OrderItem"/>
         <mapping class="com.mes.bean.Supplier"/>
+         <mapping class="com.machine.Bean.MachinesBean" />
+        <mapping class="com.machine.Bean.MachineFilesBean" />
+        <mapping class="com.machine.Bean.MachineRepairBean" />
+        <mapping class="com.machine.Bean.MachineMaintenanceBean" />
+        <mapping class="com.personnel.model.Employee"/>
+		<mapping class="com.personnel.model.User"/>
         </session-factory>
 </hibernate-configuration>

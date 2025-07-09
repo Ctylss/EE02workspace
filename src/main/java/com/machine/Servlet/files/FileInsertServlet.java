@@ -9,20 +9,20 @@ import java.io.IOException;
 
 @WebServlet("/FileInsertServlet")
 public class FileInsertServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    
+    private static final long serialVersionUID = 1L;
+
     public FileInsertServlet() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/JSP/files/fileInsert.jsp").forward(request, response);
+        request.getRequestDispatcher("/JSP/cy/files/fileInsert.jsp").forward(request, response);
     }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
 
 }

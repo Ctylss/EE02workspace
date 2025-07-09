@@ -13,8 +13,8 @@ import com.machine.Service.machine.MachinesService;
 public class UpdateMachineServlet extends HttpServlet {
     private MachinesService machinesService = new MachinesService();
     private static final long serialVersionUID = 1L;
-    
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             int machineId = Integer.parseInt(request.getParameter("machineId"));
@@ -30,11 +30,11 @@ public class UpdateMachineServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/backstage?success=update");
         } catch (IllegalArgumentException e) {
             request.setAttribute("error", e.getMessage());
-            request.getRequestDispatcher("/JSP/error.jsp").forward(request, response);
+            request.getRequestDispatcher("/JSP/cy/error.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "系統錯誤，請稍後再試");
-            request.getRequestDispatcher("/JSP/error.jsp").forward(request, response);
+            request.getRequestDispatcher("/JSP/cy/error.jsp").forward(request, response);
         }
     }
 }
