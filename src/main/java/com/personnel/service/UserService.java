@@ -1,8 +1,8 @@
-package com.personal.service;
+package com.personnel.service;
 
 import java.util.List;
 
-import com.personal.model.User;
+import com.personnel.model.User;
 
 /**
  * UserService (Business Service Layer) Interface.

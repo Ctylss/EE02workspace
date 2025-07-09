@@ -19,10 +19,9 @@ import com.machine.Bean.MachineFilesBean;
 import com.machine.Service.files.MachineFilesService;
 
 @WebServlet("/InsertFilesServlet")
-@MultipartConfig(
-    fileSizeThreshold = 1024 * 1024,    // 1MB
-    maxFileSize = 1024 * 1024 * 50,     // 50MB
-    maxRequestSize = 1024 * 1024 * 100  // 100MB
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1MB
+        maxFileSize = 1024 * 1024 * 50, // 50MB
+        maxRequestSize = 1024 * 1024 * 100 // 100MB
 )
 public class InsertFilesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -33,8 +32,8 @@ public class InsertFilesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // 顯示新增檔案頁面
-        request.getRequestDispatcher("/JSP/files/fileInsert.jsp")
-               .forward(request, response);
+        request.getRequestDispatcher("/JSP/cy/files/fileInsert.jsp")
+                .forward(request, response);
     }
 
     @Override
@@ -120,12 +119,12 @@ public class InsertFilesServlet extends HttpServlet {
     }
 
     private void handleError(HttpServletRequest request, HttpServletResponse response,
-                             String errorMessage, String fileName, String machineId)
+            String errorMessage, String fileName, String machineId)
             throws ServletException, IOException {
 
         request.setAttribute("errorMessage", errorMessage);
         request.setAttribute("fileName", fileName);
         request.setAttribute("machineId", machineId);
-        request.getRequestDispatcher("/WEB-INF/JSP/files/fileInsert.jsp").forward(request, response);
+        request.getRequestDispatcher("/JSP/cy/files/fileInsert.jsp").forward(request, response);
     }
 }

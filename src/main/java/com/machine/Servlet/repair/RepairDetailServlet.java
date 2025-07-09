@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.machine.Bean.MachineRepairJoinBean;
+import com.machine.Bean.MachineRepairBean;
 import com.machine.Service.repair.MachineRepairService;
 
 @WebServlet("/RepairDetailServlet")
@@ -26,7 +26,7 @@ public class RepairDetailServlet extends HttpServlet {
 
 		try {
 			int repairId = Integer.parseInt(idStr);
-			MachineRepairJoinBean repair = machineRepairService.findRepairById(repairId);
+			MachineRepairBean repair = machineRepairService.findRepairById(repairId);
 
 			if (repair == null) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "找不到報修資料");
@@ -34,7 +34,7 @@ public class RepairDetailServlet extends HttpServlet {
 			}
 
 			request.setAttribute("repair", repair);
-			request.getRequestDispatcher("/JSP/repair/repairDetail.jsp").forward(request, response);
+			request.getRequestDispatcher("/JSP/cy/repair/repairDetail.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,4 +47,3 @@ public class RepairDetailServlet extends HttpServlet {
 		doGet(request, response);
 	}
 }
-

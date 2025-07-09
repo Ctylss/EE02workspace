@@ -223,8 +223,8 @@
                 <i class="fas fa-users"></i> <span>人員與帳號</span>
             </a>
             <ul class="submenu-always-open">
-                <li><a href="<%= request.getContextPath() %>/personnel/manage.jsp" class="submenu-link">員工管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/personnel/manageUsers.jsp" class="submenu-link"><i class="fas fa-key"></i> 帳號密碼管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/JSP/ty/manage.jsp" class="submenu-link">員工管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/JSP/ty/manageUsers.jsp" class="submenu-link"><i class="fas fa-key"></i> 帳號密碼管理</a></li>
             </ul>
         </li>
         <% } %>

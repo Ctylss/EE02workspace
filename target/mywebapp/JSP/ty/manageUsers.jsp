@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%-- 設置頁面標題 --%>
 <% request.setAttribute("pageTitle", "帳號密碼管理"); %>
@@ -599,7 +599,7 @@
                     }
                 })
                 .then(data => {
-                    if (data === 'success') {
+                	 if (data.trim() === 'success') {
                         showMessage('密碼更新成功！', 'success');
                         newPasswordInput.value = '';
                         confirmPasswordInput.value = '';

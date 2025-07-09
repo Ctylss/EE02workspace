@@ -36,14 +36,14 @@ public class FindMachineByIdServlet extends HttpServlet {
 				return;
 			}
 			request.setAttribute("machine", machine);
-			request.getRequestDispatcher("/JSP/machine/findMachineById.jsp").forward(request, response);
+			request.getRequestDispatcher("/JSP/cy/machine/findMachineById.jsp").forward(request, response);
 
-		}catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "機台ID格式錯誤");
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "系統錯誤，請稍後再試");
-        }
+		} catch (NumberFormatException e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "機台ID格式錯誤");
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "系統錯誤，請稍後再試");
+		}
 
 	}
 

@@ -1,8 +1,8 @@
-package com.personal.dao;
+package com.personnel.dao;
 
-import java.sql.SQLException; // 處理資料庫操作可能拋出的異常
+import java.sql.SQLException;
 
-import com.personal.model.User;
+import com.personnel.model.User;
 
 /**
  * UserDAO (Data Access Object) Interface.
