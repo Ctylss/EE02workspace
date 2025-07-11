@@ -64,7 +64,6 @@ public class ProductController {
 
         model.addAttribute("products", products); // 將產品列表添加到 Model
         LOGGER.debug("Returning {} products to productList.jsp.", products.size());
-        // *** 修正: 直接返回 JSP 檔名，因為前綴已經是 /JSP/yw/ ***
         return "productList"; // 返回產品列表 JSP 的邏輯名稱 (例如 productList.jsp)
     }
 
@@ -80,8 +79,7 @@ public class ProductController {
         LOGGER.debug("Received request to show new product form.");
         model.addAttribute("product", new Product()); // 提供一個空的 Product 物件給表單
         model.addAttribute("pageTitle", "新增產品"); // 設定頁面標題
-        // *** 修正: 直接返回 JSP 檔名，因為前綴已經是 /JSP/yw/ ***
-        return "productForm"; // 返回產品表單 JSP 的邏輯名稱 (例如 productForm.jsp)
+        return "productDetail"; // 返回產品表單 JSP 的邏輯名稱 (例如 productForm.jsp)
     }
 
     /**
@@ -91,7 +89,7 @@ public class ProductController {
      * @param id URL 參數中的產品 ID。
      * @param model Spring 的 Model 物件，用於提供要編輯的產品物件給表單。
      * @param redirectAttributes 用於在重定向時添加錯誤訊息。
-     * @return 新增/編輯產品表單 JSP 視圖的邏;輯名稱，或重定向到列表頁。
+     * @return 新增/編輯產品表單 JSP 視圖的邏輯名稱，或重定向到列表頁。
      */
     @GetMapping("/edit") // 映射到 /products/edit?id=... 的 GET 請求
     public String showEditProductForm(@RequestParam("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
@@ -103,8 +101,7 @@ public class ProductController {
             model.addAttribute("product", productOptional.get()); // 將找到的產品添加到 Model
             model.addAttribute("pageTitle", "編輯產品"); // 設定頁面標題
             LOGGER.debug("Found product with ID: {} for editing.", id);
-            // *** 修正: 直接返回 JSP 檔名，因為前綴已經是 /JSP/yw/ ***
-            return "productForm"; // 返回產品表單 JSP 的邏輯名稱 (例如 productForm.jsp)
+            return "productDetail"; // 返回產品表單 JSP 的邏輯名稱 (例如 productForm.jsp)
         } else {
             LOGGER.warn("Product with ID {} not found for editing. Redirecting to list.", id);
             redirectAttributes.addFlashAttribute("errorMessage", "產品 ID " + id + " 未找到，無法編輯。");
@@ -137,8 +134,7 @@ public class ProductController {
             model.addAttribute("errorMessage", "新增產品失敗：" + ex.getMessage());
             model.addAttribute("product", product); // 將原始產品數據回傳給表單，以便用戶修正
             model.addAttribute("pageTitle", "新增產品"); // 確保頁面標題正確
-            // *** 修正: 直接返回 JSP 檔名，因為前綴已經是 /JSP/yw/ ***
-            return "productForm"; // 返回到表單頁面顯示錯誤
+            return "productDetail"; // 返回到表單頁面顯示錯誤
         }
     }
 
@@ -166,8 +162,7 @@ public class ProductController {
             model.addAttribute("errorMessage", "更新產品失敗：" + ex.getMessage());
             model.addAttribute("product", product); // 將原始產品數據回傳給表單，以便用戶修正
             model.addAttribute("pageTitle", "編輯產品"); // 確保頁面標題正確
-            // *** 修正: 直接返回 JSP 檔名，因為前綴已經是 /JSP/yw/ ***
-            return "productForm"; // 返回到表單頁面顯示錯誤
+            return "productDetail"; // 返回到表單頁面顯示錯誤
         } catch (ProductNotFoundException ex) {
             LOGGER.warn("Product with ID {} not found for update: {}", product.getProductId(), ex.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "更新失敗：" + ex.getMessage());
@@ -175,17 +170,20 @@ public class ProductController {
         }
     }
 
+    
+
     /**
      * 顯示產品詳情頁面。
-     * 映射到 /products/view (GET) - 使用 @RequestParam 以匹配您 JSP 中的連結格式
+     * **此處已修改**：從處理請求參數 `?id=` 改為處理路徑變數 `/{id}`。
+     * 映射到 /products/view/{id} (GET)
      *
-     * @param id URL 參數中的產品 ID。
+     * @param id URL 路徑中的產品 ID。
      * @param model Spring 的 Model 物件。
      * @param redirectAttributes 用於在產品未找到時添加錯誤訊息。
      * @return 產品詳情 JSP 視圖的邏輯名稱，或重定向到列表頁。
      */
-    @GetMapping("/view") // 映射到 /products/view?id=... 的 GET 請求
-    public String viewProductDetails(@RequestParam("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
+    @GetMapping("/view/{id}") // <-- 關鍵修改：從 "/view" 改為 "/view/{id}"
+    public String viewProductDetails(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) { // <-- 關鍵修改：從 @RequestParam("id") 改為 @PathVariable("id")
         LOGGER.debug("Received request to view product details for ID: {}", id);
         Optional<Product> productOptional = productService.getProductById(id);
 
@@ -193,15 +191,15 @@ public class ProductController {
             model.addAttribute("product", productOptional.get());
             model.addAttribute("pageTitle", "產品詳情");
             LOGGER.debug("Found product with ID: {} for viewing.", id);
-            // *** 修正: 直接返回 JSP 檔名，因為前綴已經是 /JSP/yw/ ***
-            // 假設您的詳情 JSP 檔案是 productDetail.jsp
-            return "productDetail";
+            return "productDetail"; // 返回產品詳情 JSP
         } else {
             LOGGER.warn("Product with ID {} not found for viewing. Redirecting to list.", id);
             redirectAttributes.addFlashAttribute("errorMessage", "產品 ID " + id + " 未找到，無法查看。");
             return "redirect:/products/list";
         }
     }
+
+
 
     /**
      * 處理根據產品 ID 刪除產品的 HTTP GET 請求。
@@ -229,7 +227,6 @@ public class ProductController {
             LOGGER.warn("Invalid argument for deleting product ID {}: {}", id, ex.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "刪除失敗：" + ex.getMessage());
         }
-        // 無論成功或失敗，都重定向到列表頁
-        return "redirect:/products/list"; // *** 重要修正: 使用完整的重定向 URL ***
+        return "redirect:/products/list";
     }
 }

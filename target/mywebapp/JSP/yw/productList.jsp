@@ -429,15 +429,11 @@
 <body>
     <div class="app-wrapper">
         <aside class="main-sidebar" role="complementary" aria-label="側邊欄">
-            <%-- Include the sidebar.jsp here --%>
             <jsp:include page="/common/sidebar.jsp" />
         </aside>
 
         <div class="main-right-content-wrapper">
-            <header class="main-header">
-                <%-- Include the header.jsp here --%>
-                <jsp:include page="/common/header.jsp" />
-            </header>
+       
 
             <div class="actual-page-content">
                 <section class="data-table-section">
@@ -456,8 +452,9 @@
                             <i class="fas fa-check-circle"></i>
                             <span><c:out value="${sessionScope.message}"/></span>
                         </div>
-                        <c:remove var="message" scope="session"/>
                     </c:if>
+                    <%-- Always remove session message after display, regardless of its content --%>
+                    <c:remove var="message" scope="session"/>
 
                     <%-- Product List Section --%>
                     <c:if test="${action == 'list' || action == 'byCategory' || action == null}">
@@ -467,7 +464,7 @@
                                 <i class="fas fa-plus-circle"></i> 新增產品
                             </a>
                             <form action="${pageContext.request.contextPath}/products/byCategory" method="get">
-                                <input type="text" name="category" placeholder="按類別篩選..." class="search-input" value="${param.category}" />
+                                <input type="text" name="category" placeholder="按類別篩選..." class="search-input" value="<c:out value="${param.category}"/>" />
                                 <button type="submit" class="btn btn-secondary">
                                     <i class="fas fa-filter"></i> 篩選
                                 </button>
@@ -497,12 +494,12 @@
                                                 <td><c:out value="${product.productCode}"/></td>
                                                 <td><c:out value="${product.productName}"/></td>
                                                 <td><c:out value="${product.category}"/></td>
-                                                <td><c:out value="${product.unitOfMeasure}"/></td>
+                                                <td><c:out value="${product.unit}"/></td> <%-- **修正：從 unitOfMeasure 改為 unit** --%>
                                                 <td><fmt:formatNumber value="${product.sellingPrice}" pattern="#,##0.00"/></td>
                                                 <td class="actions-column">
                                                     <a href="${pageContext.request.contextPath}/products/view/${product.productId}" class="btn-icon view-icon" title="查看"><i class="fas fa-eye"></i></a>
                                                     <a href="${pageContext.request.contextPath}/products/edit/${product.productId}" class="btn-icon edit-icon" title="編輯"><i class="fas fa-edit"></i></a>
-                                                    <a href="${pageContext.request.contextPath}/bom/listByProduct?productId=${product.productId}&productName=${product.productName}" class="btn-icon tools-icon" title="查看產品用料"><i class="fas fa-tools"></i></a>
+                                                    <a href="${pageContext.request.contextPath}/bom/list?productId=${product.productId}&productName=${product.productName}" class="btn-icon tools-icon" title="查看產品用料"><i class="fas fa-tools"></i></a>
                                                     <button type="button" class="btn-icon delete-icon" title="刪除"
                                                             onclick="confirmAndDelete('${product.productName}', '${product.productId}', '${pageContext.request.contextPath}/products/delete/${product.productId}');">
                                                         <i class="fas fa-trash"></i>
@@ -539,7 +536,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="unit">單位:</label>
-                                <input type="text" id="unit" name="unit" required value="<c:out value="${not empty product ? product.unitOfMeasure : ''}"/>" />
+                                <input type="text" id="unit" name="unit" required value="<c:out value="${not empty product ? product.unit : ''}"/>" /> <%-- **修正：從 product.unitOfMeasure 改為 product.unit** --%>
                             </div>
                             <div class="form-group">
                                 <label for="sellingPrice">銷售價格:</label>
@@ -550,7 +547,7 @@
                                 <input type="number" step="0.01" id="cost" name="cost" min="0" value="<c:out value="${not empty product ? product.cost : ''}"/>" />
                             </div>
                             <div class="form-group checkbox-group">
-                                <input type="checkbox" id="isActive" name="isActive" ${(product != null && product.isActive) ? 'checked' : ''} />
+                                <input type="checkbox" id="isActive" name="isActive" value="true" ${(not empty product && product.isActive) ? 'checked' : ''} /> <%-- **修正：添加 value="true" 以便後端正確接收** --%>
                                 <label for="isActive">啟用</label>
                             </div>
                             <div class="form-group">
@@ -591,7 +588,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>單位:</label>
-                                    <p class="form-static-text"><c:out value="${product.unitOfMeasure}"/></p>
+                                    <p class="form-static-text"><c:out value="${product.unit}"/></p> <%-- **修正：從 product.unitOfMeasure 改為 product.unit** --%>
                                 </div>
                                 <div class="form-group">
                                     <label>銷售價格:</label>
@@ -661,7 +658,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="unit">單位:</label>
-                                    <input type="text" id="unit" name="unit" required value="<c:out value="${product.unitOfMeasure}"/>" />
+                                    <input type="text" id="unit" name="unit" required value="<c:out value="${product.unit}"/>" /> <%-- **修正：從 product.unitOfMeasure 改為 product.unit** --%>
                                 </div>
                                 <div class="form-group">
                                     <label for="sellingPrice">銷售價格:</label>
@@ -672,7 +669,7 @@
                                     <input type="number" step="0.01" id="cost" name="cost" min="0" value="<c:out value="${product.cost}"/>" />
                                 </div>
                                 <div class="form-group checkbox-group">
-                                    <input type="checkbox" id="isActive" name="isActive" ${product.isActive ? 'checked' : ''} />
+                                    <input type="checkbox" id="isActive" name="isActive" value="true" ${product.isActive ? 'checked' : ''} /> <%-- **修正：添加 value="true" 並簡化判斷** --%>
                                     <label for="isActive">啟用</label>
                                 </div>
                                 <div class="form-group">
@@ -683,15 +680,14 @@
                                     <label for="description">描述:</label>
                                     <textarea id="description" name="description" rows="5"><c:out value="${product.description}"/></textarea>
                                 </div>
-                                <input type="submit" value="更新產品" />
+                                <input type="submit" value="更新產品資訊" /> <%-- **修正：按鈕文字更符合編輯操作** --%>
                             </form>
                             <div class="form-links-group">
-                                <a href="${pageContext.request.contextPath}/products/view/${product.productId}"><i class="fas fa-eye"></i> 查看產品詳情</a>
-                                <a href="${pageContext.request.contextPath}/products/list" class="btn btn-secondary"><i class="fas fa-list"></i> 返回列表</a>
+                                <a href="${pageContext.request.contextPath}/products/list"><i class="fas fa-list"></i> 返回列表</a>
                             </div>
                         </c:if>
                         <c:if test="${empty product}">
-                            <p>無法載入要編輯的產品，可能不存在。</p>
+                            <p>產品不存在或無法載入。</p>
                             <p><a href="${pageContext.request.contextPath}/products/list">返回列表</a></p>
                         </c:if>
                     </c:if>
@@ -700,45 +696,24 @@
             </div>
 
             <footer class="main-footer">
-                <%-- Include the footer.jsp here --%>
                 <jsp:include page="/common/footer.jsp" />
             </footer>
         </div>
     </div>
 
-    <%-- Optional: Include any necessary JavaScript files --%>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // JavaScript function to handle POST deletion
+        // JavaScript for delete confirmation
         function confirmAndDelete(productName, productId, deleteUrl) {
-            if (confirm('確定要刪除產品 ' + productName + ' (ID: ' + productId + ') 嗎？這將無法恢復！')) {
-                // Create a temporary form
-                var form = document.createElement('form');
-                form.setAttribute('method', 'POST');
-                form.setAttribute('action', deleteUrl);
-
-                // Add CSRF token if Spring Security is enabled
-                // You'll need to retrieve the actual CSRF token from your page,
-                // e.g., from a hidden input generated by Spring Security.
-                // For example: var csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-                // var csrfParam = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-                // if (csrfToken && csrfParam) {
-                //     var csrfInput = document.createElement('input');
-                //     csrfInput.setAttribute('type', 'hidden');
-                //     csrfInput.setAttribute('name', csrfParam);
-                //     csrfInput.setAttribute('value', csrfToken);
-                //     form.appendChild(csrfInput);
-                // }
-
-                // Append the form to the body and submit it
-                document.body.appendChild(form);
-                form.submit();
+            if (confirm('確定要刪除產品 "' + productName + '" (ID: ' + productId + ') 嗎？此操作不可恢復。')) {
+                window.location.href = deleteUrl;
             }
         }
-    </script>
-    <%-- If you have a sidebar.js for interactivity, include it.
-        Make sure the path is correct relative to the current JSP or the web context root. --%>
-    <%-- <script src="${pageContext.request.contextPath}/js/sidebar.js"></script> --%>
-</body>
 
+        // JavaScript for clearing session message on page load, if present
+        // This is handled by c:remove var="message" scope="session" at the top of the content area.
+        // If you need more complex message handling (e.g., flash messages that persist for one redirect)
+        // you might need a different approach or a server-side framework feature.
+    </script>
+</body>
 </html>
