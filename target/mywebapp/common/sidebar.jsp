@@ -172,8 +172,8 @@
                     <a href="#" class="submenu-link">供應商管理</a>
                     <ul class="nested-submenu-always-open">
                         <li><a href="<%= request.getContextPath() %>/OrderAddFormServlet" class="submenu-link">新增訂單</a></li>
-                        <li><a href="<%= request.getContextPath() %>/SupplierListServlet" class="submenu-link">A</a></li>
-                        <li><a href="<%= request.getContextPath() %>/OrderListServlet" class="submenu-link">B</a></li>
+                        <li><a href="<%= request.getContextPath() %>/SupplierListServlet" class="submenu-link">供應商列表</a></li>
+                        <li><a href="<%= request.getContextPath() %>/OrderListServlet" class="submenu-link">訂單列表</a></li>
                     </ul>
                 </li>
              </ul>

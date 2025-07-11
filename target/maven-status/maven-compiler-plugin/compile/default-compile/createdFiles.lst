@@ -1,6 +1,7 @@
 com\example\controller\WorkOrderController$1.class
 com\material\servlet\BOMUpdateServlet$1.class
 com\example\exception\ProductNotFoundException.class
+com\personnel\servlet\EmployeeManagementServlet.class
 com\example\service\impl\BillOfMaterialServiceImpl.class
 com\machine\Servlet\machine\GoInsertMachineServlet.class
 com\example\service\ProductionScheduleService.class
@@ -14,6 +15,7 @@ com\personnel\service\impl\UserServiceImpl.class
 com\machine\util\DBUtil.class
 com\material\servlet\BOMSaveServlet.class
 com\example\model\WorkOrder.class
+com\personnel\servlet\LoginProcessServlet.class
 com\example\controller\BillOfMaterialController.class
 com\machine\Servlet\repair\RepairDetailServlet.class
 com\example\service\impl\WorkOrderServiceImpl.class
@@ -56,6 +58,7 @@ com\personnel\dao\impl\EmployeeDaoImpl.class
 com\example\service\impl\ProductionScheduleServiceImpl.class
 com\machine\Servlet\repair\MachineRepairViewServlet.class
 com\example\service\impl\MaterialServiceImpl.class
+com\personnel\dao\util\OpenSessionViewFilter.class
 com\example\exception\InvalidBillOfMaterialDataException.class
 com\machine\Servlet\repair\SearchRepairByStatusServlet.class
 com\machine\Service\machine\MachinesService.class
@@ -68,6 +71,7 @@ com\example\dao\BillOfMaterialRepository.class
 com\mes\bean\Material.class
 com\material\servlet\BOMSaveServlet$1.class
 com\machine\Servlet\maintenance\FindAllMachineMaintenance.class
+com\personnel\dao\util\SessionFactoryListener.class
 com\example\controller\ProductionScheduleController$1.class
 com\machine\Bean\MachinesBean.class
 com\machine\Servlet\machine\InsertMachineServlet.class
@@ -92,6 +96,7 @@ com\personnel\dao\impl\UserDAOImpl.class
 com\example\controller\ProductController.class
 com\machine\Servlet\machine\ConfirmDeleteMachineServlet.class
 com\example\exception\BillOfMaterialNotFoundException.class
+com\personnel\servlet\UserManagementServlet.class
 com\mes\servlet\OrderInsertServlet.class
 com\example\exception\InvalidWorkOrderDataException.class
 com\example\service\BillOfMaterialService.class

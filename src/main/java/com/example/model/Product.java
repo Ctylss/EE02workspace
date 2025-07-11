@@ -31,13 +31,19 @@ public class Product {
     private String description; // Product description
 
     @Column(name = "unit", length = 20) // Mapped to 'unit' column in DB
-    private String unitOfMeasure; // Unit of measure (e.g., PCS, KG, M)
+    private String unit; // *** 修正: 將屬性名稱從 unitOfMeasure 改為 unit ***
 
     @Column(name = "selling_price", precision = 10, scale = 4) // Example: 10 total digits, 4 after decimal
     private BigDecimal sellingPrice; // Selling price of the product
 
     @Column(name = "cost", precision = 10, scale = 4) // Example: 10 total digits, 4 after decimal
     private BigDecimal cost; // Cost of the product
+
+    @Column(name = "is_active") // 新增的 isActive 属性
+    private boolean isActive; // 或者使用 Boolean isActive;
+
+    @Column(name = "image_url", length = 255) // <-- 新增此行：圖片 URL 屬性
+    private String imageUrl; // 產品圖片的URL
 
     @Column(name = "create_date", nullable = false, updatable = false)
     private LocalDateTime createDate; // Timestamp for creation
@@ -50,14 +56,16 @@ public class Product {
         // Default constructor for JPA
     }
 
-    public Product(String productCode, String productName, String category, String description, String unitOfMeasure, BigDecimal sellingPrice, BigDecimal cost) {
+    public Product(String productCode, String productName, String category, String description, String unit, BigDecimal sellingPrice, BigDecimal cost) { // *** 修正: 建構子參數也改為 unit ***
         this.productCode = productCode;
         this.productName = productName;
         this.category = category; // ADDED to constructor
         this.description = description;
-        this.unitOfMeasure = unitOfMeasure;
+        this.unit = unit; // *** 修正: 使用 unit ***
         this.sellingPrice = sellingPrice;
         this.cost = cost;
+        this.isActive = true; // 可以在这里设置默认值，例如创建时默认为true
+        // imageUrl 可以在此設定預設值，或讓它保持 null
     }
 
     // --- Lifecycle Callbacks (for automatic timestamping) ---
@@ -97,7 +105,6 @@ public class Product {
         this.productName = productName;
     }
 
-    // ADDED: Getter and Setter for category
     public String getCategory() {
         return category;
     }
@@ -114,12 +121,14 @@ public class Product {
         this.description = description;
     }
 
-    public String getUnitOfMeasure() {
-        return unitOfMeasure;
+    // *** 修正: 將 getUnitOfMeasure 改為 getUnit ***
+    public String getUnit() {
+        return unit; // 返回 unit 屬性
     }
 
-    public void setUnitOfMeasure(String unitOfMeasure) {
-        this.unitOfMeasure = unitOfMeasure;
+    // *** 修正: 將 setUnitOfMeasure 改為 setUnit ***
+    public void setUnit(String unit) {
+        this.unit = unit; // 設定 unit 屬性
     }
 
     public BigDecimal getSellingPrice() {
@@ -138,11 +147,28 @@ public class Product {
         this.cost = cost;
     }
 
+    // 新增 isActive 的 Getter 和 Setter
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    // <-- 新增此部分：imageUrl 的 Getter 和 Setter
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    // 新增部分結束 -->
+
     public LocalDateTime getCreateDate() {
         return createDate;
     }
-
-    // No setter for createDate as it's set automatically on creation
 
     public LocalDateTime getUpdateDate() {
         return updateDate;
@@ -170,18 +196,18 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-               "productId=" + productId +
-               ", productCode='" + productCode + '\'' +
-               ", productName='" + productName + '\'' +
-               ", category='" + category + '\'' + // ADDED to toString
-               ", unitOfMeasure='" + unitOfMeasure + '\'' +
-               ", sellingPrice=" + sellingPrice +
-               ", cost=" + cost +
-               '}';
-    }
-
-    public Object getUnit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUnit'");
+                "productId=" + productId +
+                ", productCode='" + productCode + '\'' +
+                ", productName='" + productName + '\'' +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                ", unit='" + unit + '\'' +
+                ", sellingPrice=" + sellingPrice +
+                ", cost=" + cost +
+                ", isActive=" + isActive +
+                ", imageUrl='" + imageUrl + '\'' + // <-- 在 toString 中也加入 imageUrl
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                '}';
     }
 }
